@@ -1,33 +1,22 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue';
+import { RouterView } from 'vue-router'
+import NavigationMenu from './components/NavigationMenu.vue'
+
+const userType = ref("PUBLICO");
 
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/cadastro">Cadastro</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-    </nav>
-  </header>
+  <div class="app">
+    <NavigationMenu :userType="userType" />
 
-  <RouterView />
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
-.navbar {
+.app {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #fafafa;
-}
-
-nav {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
 }
 </style>

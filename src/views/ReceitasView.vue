@@ -26,11 +26,11 @@ watch([pesquisaNome, tipoEscolhido], () => {
         </div>
         <div class="escolhas">
             <div>
-                <label for="pesquisaRefeicao">Pesquisar por nome:</label>
+                <label for="pesquisaRefeicao">Pesquisar por nome: </label>
                 <input v-model="pesquisaNome" type="text" id="pesquisaRefeicao">
             </div>
             <div>
-                <label for="pesquisaRefeicao">Pesquisar por tipo:</label>
+                <label for="pesquisaRefeicao">Pesquisar por tipo: </label>
                 <select v-model="tipoEscolhido">
                     <option value="TODOS">Todos</option>
                     <option value="CAFE">Café da Manhã</option>
@@ -58,7 +58,7 @@ watch([pesquisaNome, tipoEscolhido], () => {
 .receitas {
     width: 100%;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: space-around;
     max-height: 80vh;

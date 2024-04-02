@@ -21,17 +21,17 @@ if (receita.tipoRefeicao == "CAFE") {
 
 <template>
     <div class="card-container">
-        <img class="card-image" src="https://img.cybercook.com.br/receitas/117/salada-de-folhas-verdes.jpeg">
+        <img class="card-image" :src="receita.imagemURL">
         <div class="card-info">
             <div class="card-title">
-                {{ receita.nome }}
+                <strong>{{ receita.nome }}</strong>
             </div>
             <div class="card-description">
                 {{ tipoRefeicao }}
             </div>
             <div class="card-tags">
                 <div class="tag">Calorias: {{ receita.calorias }}</div>
-                <div class="tag">Tempo: {{ receita.tempoPreparo }} min</div>
+                <div class="tag">{{ receita.tempoPreparo }} min</div>
             </div>
         </div>
     </div>
@@ -40,11 +40,12 @@ if (receita.tipoRefeicao == "CAFE") {
 <style scoped>
 .card-container {
     display: flex;
-    min-width: 300px;
+    width: 30%;
+    height: 20vh;
     flex-direction: row;
     border: 1px solid #8A0B01;
     border-radius: 1vw;
-    padding: 0.5vw;
+    padding: 5px;
     gap: 5px;
 }
 
@@ -59,19 +60,33 @@ if (receita.tipoRefeicao == "CAFE") {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
 }
+
+.card-title {
+    color: #8A0B01;
+}
+
+.card-description {}
 
 .card-tags {
     display: flex;
+    width: 100%;
     flex-direction: row;
+    justify-content: start;
+    gap: 3px;
     flex-wrap: wrap;
 }
 
 .tag {
-    margin: 0 0 2px 2px;
-    padding: 0.25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 45%;
     background-color: #F8694D;
     border-radius: 10px;
     color: white;
+    font-size: 0.8em;
 }
 </style>

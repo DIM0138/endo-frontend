@@ -5,7 +5,7 @@ const { logoSize } = defineProps(['logoSize']);
 </script>
 
 <template>
-    <div class="container">
+    <div class="">
         <span class="e" :style="{ fontSize: logoSize * 100 + '%' }">e</span>
         <span class="nutri" :style="{ fontSize: logoSize * 70 + '%' }">nutri</span>
     </div>

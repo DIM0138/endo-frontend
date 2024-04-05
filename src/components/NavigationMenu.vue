@@ -40,7 +40,7 @@ const checkDevice = (windowWidth) => {
 			</RouterLink>
 		</nav>
 
-		<nav v-else class="mobile-menu">
+		<nav v-else class="mobile-menu fixed-bottom">
 			<RouterLink class="mobile-menu-link" :active-class="'mobile-menu-link-active'" to="/">
 				<HomeIcon />Home
 			</RouterLink>

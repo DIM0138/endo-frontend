@@ -50,8 +50,8 @@ watch([pesquisaNome, tipoEscolhido], () => {
         </div>
     </div>
     <hr/>
-    <div class="receitas mt-2">
-        <ReceitaCard class="receita-card" :receita="receita" :getReceitas="getReceitas"
+    <div class="receitas row mx-1 mx-sm-0">
+        <ReceitaCard class="receita-card col col-sm-4" :receita="receita" :getReceitas="getReceitas"
             v-for="receita in receitasFiltradas" :key="receita.id" />
     </div>
 </template>
@@ -63,7 +63,7 @@ watch([pesquisaNome, tipoEscolhido], () => {
     flex-direction: column;
 }
 
-.receitas {
+/* .receitas {
     width: 100%;
     display: flex;
     gap: 5px;
@@ -71,12 +71,12 @@ watch([pesquisaNome, tipoEscolhido], () => {
     justify-content: space-around;
     max-height: 80vh;
     overflow: auto;
-}
+} */
 
-.receita-card {
+/* .receita-card {
     max-height: 15vh;
     background-color: #fff4d8;
-}
+} */
 
 .header {
     display: flex;

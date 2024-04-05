@@ -20,18 +20,25 @@ watch([pesquisaNome, tipoEscolhido], () => {
 
 <template>
     <div class="header">
-        <div class="titulo">
-            <h1>Receitas disponíveis:</h1>
-            <button>Adicionar receita</button>
-        </div>
-        <div class="escolhas">
-            <div>
-                <label for="pesquisaRefeicao">Pesquisar por nome: </label>
-                <input v-model="pesquisaNome" type="text" id="pesquisaRefeicao">
+        <div class="titulo mt-3 px-sm-0 row row row-cols-1 row-cols-sm-2">
+            <h3 class="text-cn col">Receitas disponíveis</h3>
+            <button class="btn btn-receita px-3 col-sm-3 me-3 py-3 py-sm-2"><i class="bi bi-plus-circle-fill me-1"></i>Adicionar receita</button>
+        </div>     
+        <div class="filtro-receitas form-group mt-4 px-3 px-sm-0 row row-cols-1 row-cols-sm-4 d-flex justify-content-end">
+            <div class="col col-sm-auto">
+                
             </div>
-            <div>
-                <label for="pesquisaRefeicao">Pesquisar por tipo: </label>
-                <select v-model="tipoEscolhido">
+            <label for="pesquisaRefeicao" class="form-label col col-sm-auto d-flex align-items-center">
+                <i class="bi bi-funnel-fill me-1"></i>
+                Nome </label>
+            <div class="col col-sm-4">
+                <input v-model="pesquisaNome"  class="form-control" type="text" id="pesquisaRefeicao">
+            </div>
+            <label for="pesquisaRefeicao" class="form-label col col-sm-auto mt-2 mt-sm-0 d-flex align-items-center">
+                <i class="bi bi-funnel-fill me-1"></i>
+                Tipo </label>
+            <div class="col col-sm-4">
+                <select class="form-select" v-model="tipoEscolhido">
                     <option value="TODOS">Todos</option>
                     <option value="CAFE">Café da Manhã</option>
                     <option value="ALMOCO">Almoço</option>
@@ -42,7 +49,8 @@ watch([pesquisaNome, tipoEscolhido], () => {
             </div>
         </div>
     </div>
-    <div class="receitas">
+    <hr/>
+    <div class="receitas mt-2">
         <ReceitaCard class="receita-card" :receita="receita" :getReceitas="getReceitas"
             v-for="receita in receitasFiltradas" :key="receita.id" />
     </div>
@@ -81,6 +89,18 @@ watch([pesquisaNome, tipoEscolhido], () => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
 
+.btn-receita {
+    background-color: #F8694D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.btn-receita:hover {
+    background-color: #8a0b01;
 }
 </style>

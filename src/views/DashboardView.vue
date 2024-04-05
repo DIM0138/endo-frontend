@@ -9,7 +9,6 @@ const api = axios.create({
 })
 
 const receitas = ref([])
-const mobile = ref()
 
 const getReceitas = async () => {
   const response = await api.get('/receitas/todos')
@@ -20,18 +19,6 @@ onBeforeMount(() => {
   getReceitas()
 })
 
-window.addEventListener('resize', () => {
-  checkDevice(window.innerWidth)
-})
-
-const checkDevice = (windowWidth) => {
-  if (windowWidth < 768) {
-    mobile.value = true
-    console.log('mobile')
-  } else {
-    mobile.value = false
-  }
-}
 </script>
 
 <template>

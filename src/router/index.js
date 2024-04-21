@@ -3,7 +3,6 @@ import HomeView from '@/views/HomeView.vue'
 import SobreView from '@/views/SobreView.vue'
 import CadastroView from '@/views/CadastroView.vue'
 import ReceitasView from '@/views/ReceitasView.vue'
-import ReceitaCard from '@/components/ReceitaCard.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import PacientesView from '@/views/PacientesView.vue'
 import PacienteCard from '@/components/PacienteCard.vue'
@@ -41,14 +40,7 @@ const router = createRouter({
         {
           path: '/dashboard/receitas',
           name: 'receitas',
-          component: ReceitasView,
-          children: [
-            {
-              path: '/receitas/:id',
-              name: 'receita',
-              component: ReceitaCard
-            }
-          ]
+          component: ReceitasView
         },
         {
           path: '/dashboard/pacientes',

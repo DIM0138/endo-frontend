@@ -8,15 +8,15 @@ const userType = ref("PUBLICO");
 </script>
 
 <template>
-  <div class="app">
+  <div class="app container-fluid">
     <NavigationMenu :userType="userType" />
-
     <RouterView />
   </div>
 </template>
 
 <style scoped>
 .app {
-  display: flex;
+  margin: 0;
+  padding: 0;
 }
 </style>

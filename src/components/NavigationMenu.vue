@@ -1,117 +1,54 @@
 <script setup>
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
-import LogoEnutri from './LogoEnutri.vue'
-import HomeIcon from './icons/HomeIcon.vue'
-import AccountIcon from './icons/AccountIcon.vue'
-import AboutIcon from './icons/AboutIcon.vue'
-
-const mobile = ref();
-const { userType } = defineProps(['userType']);
-
-window.addEventListener('DOMContentLoaded', () => {
-	checkDevice(window.innerWidth)
-})
-
-window.addEventListener('resize', () => {
-	checkDevice(window.innerWidth)
-})
-
-const checkDevice = (windowWidth) => {
-	if (windowWidth < 768) {
-		mobile.value = true;
-	}
-	else {
-		mobile.value = false;
-	}
-}
 
 </script>
 
 <template>
-	<!-- MENU PUBLICO -->
-	<div v-if="userType === 'PUBLICO'">
-
-		<nav v-if="!mobile" class="desktop-menu">
-			<LogoEnutri logo-size="3" />
-			<RouterLink class="desktop-menu-link" :active-class="'desktop-menu-link-active'" to="/">Home</RouterLink>
-			<RouterLink class="desktop-menu-link" :active-class="'desktop-menu-link-active'" to="/sobre">Sobre</RouterLink>
-			<RouterLink class="desktop-menu-link" :active-class="'desktop-menu-link-active'" to="/cadastro">Cadastro
-			</RouterLink>
-		</nav>
-
-		<nav v-else class="mobile-menu fixed-bottom">
-			<RouterLink class="mobile-menu-link" :active-class="'mobile-menu-link-active'" to="/">
-				<HomeIcon />Home
-			</RouterLink>
-
-			<RouterLink class="mobile-menu-link" :active-class="'mobile-menu-link-active'" to="/sobre">
-				<AboutIcon />Sobre
-			</RouterLink>
-
-			<RouterLink class="mobile-menu-link" :active-class="'mobile-menu-link-active'" to="/cadastro">
-				<AccountIcon />Cadastro
-			</RouterLink>
-		</nav>
-
-	</div>
-
-	<!-- MENU PACIENTE -->
-
-
-	<!-- MENU NUTRICIONISTA -->
-
+	<nav class="navbar navbar-expand-md sticky-top" style="background-color: #FFF4D8;">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<img src="../assets/eNutri-logo.svg" height="35px" width="auto" />
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Abrir menu">
+				<span class="bi bi-list"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav align-items-end ms-auto gap-md-5">
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/">Home <i
+							class="bi bi-house-fill d-md-none"></i></RouterLink>
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/sobre">Sobre <i
+							class="bi bi-journal-richtext d-md-none"></i></RouterLink>
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/cadastro">Cadastre-se <i
+							class="bi bi-person-fill-add d-md-none"></i></RouterLink>
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/dashboard">Dashboard <i
+							class="bi bi-ui-radios d-md-none"></i></RouterLink>
+				</div>
+			</div>
+		</div>
+	</nav>
 </template>
 
 <style>
-.desktop-menu {
-	display: flex;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	height: 7vh;
-	justify-content: space-around;
-	align-items: center;
-	background-color: #FFF4D8;
-}
-
-.desktop-menu-link {
+.nav-link {
 	color: #8A0B01;
 	font-weight: 500;
-	text-decoration: none;
 }
 
-.desktop-menu-link:hover {
+.nav-link:hover {
 	color: #FF9C28;
 }
 
-.desktop-menu-link-active {
-	color: #F8694D;
+.nav-link-active {
+	color: #F8694D !important;
 }
 
-.mobile-menu {
-	display: flex;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 7vh;
-	justify-content: space-around;
-	background-color: white;
-	transform-origin: top center;
-}
-
-.mobile-menu-link {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
-	align-items: center;
-	text-decoration: none;
+.navbar-toggler {
 	color: #8A0B01;
-	-webkit-tap-highlight-color: transparent;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.mobile-menu-link-active {
-	color: #F8694D;
+.bi-list {
+	color: #8A0B01;
+	font-size: 1.5em;
 }
 </style>

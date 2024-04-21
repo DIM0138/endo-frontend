@@ -5,106 +5,45 @@ import LoginForm from '@/components/LoginForm.vue';
 </script>
 
 <template>
-  <div class="page-container">
-    <div class="greeting-container">
-      <span class="greeting">Boas-vindas à plataforma</span>
-      <LogoEnutri logo-size="7" />
-      <p class="description">Ao combinar conveniência, personalização e suporte contínuo, a plataforma eNutri se
-        destaca como uma
-        ferramenta
-        indispensável para quem busca alcançar seus objetivos de saúde de forma eficaz e saudável.</p>
-      <img src="../assets/healthy-style.svg" class="desktop-only">
+  <div class="container-md">
+    <div class="row my-4">
+      <div class="col-12 col-md-8 order-1 order-md-0 p-md-5 my-4">
+        <div class="d-flex flex-column">
+          <span class=" greeting">Boas-vindas à plataforma</span>
+          <LogoEnutri :logoSize="7" />
+        </div>
+
+        <span class="description">Ao combinar conveniência, personalização e suporte contínuo, a plataforma eNutri se
+          destaca como uma ferramenta indispensável para quem busca alcançar seus objetivos de saúde de forma eficaz e
+          saudável. </span>
+        <img src="../assets/healthy-style.svg" class="d-block d-md-none order-2">
+      </div>
+
+      <div class="col-12 col-md-4 order-0 order-md-1">
+        <LoginForm />
+      </div>
     </div>
-    <div class="login-container">
-      <LoginForm />
-    </div>
-    <img src="../assets/healthy-style.svg" class="mobile-only">
+    <img src="../assets/healthy-style.svg" class="desktop-img d-md-block d-none">
   </div>
 </template>
 
 <style scoped>
-@media screen and (min-width: 769px) {
-  .page-container {
-    margin: 14vh 5vw 0 5vw;
-    padding: 6vw;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .greeting-container {
-    width: 40%;
-  }
-
-  .greeting {
-    font-size: 1.55em;
-    color: #8A0B01;
-  }
-
-  .description {
-    font-size: 1.1em;
-    color: #8A0B01;
-    margin-top: 10px;
-    text-align: justify;
-  }
-
-  .login-container {
-    width: 30%;
-  }
-
-  .desktop-only {
-    display: block;
-    position: fixed;
-    top: 25vh;
-    right: 0vw;
-    z-index: -1;
-    max-height: 80vh;
-  }
-
-  .mobile-only {
-    display: none;
-  }
+.desktop-img {
+  display: block;
+  position: fixed;
+  bottom: -20vh;
+  right: 20vw;
+  z-index: -1;
+  max-height: 80vh;
 }
 
-@media screen and (max-width: 768px) {
-  .page-container {
-    margin: 1vh 3vw 1vh 3vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+.greeting {
+  font-size: 1.2em;
+  color: #8a0b01;
+  font-weight: 700;
+}
 
-  .greeting-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .greeting {
-    text-align: center;
-    color: #8A0B01;
-    font-size: 1.25em;
-    margin-bottom: 5px;
-  }
-
-  .description {
-    min-width: 100%;
-    text-align: justify;
-    margin: 20px 0 20px 0;
-  }
-
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .desktop-only {
-    display: none;
-  }
+.description {
+  text-justify: justify;
 }
 </style>

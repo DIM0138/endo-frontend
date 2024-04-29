@@ -9,6 +9,7 @@ import PacienteCard from '@/components/PacienteCard.vue'
 import PlanosAlimentaresView from '@/views/PlanosAlimentaresView.vue'
 import PlanoAlimentarCard from '@/components/PlanoAlimentarCard.vue'
 import PerfilView from '@/views/PerfilView.vue'
+import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       name: 'dashboard',
       component: DashboardView,
       children: [
+        {
+          path: 'paciente/plano-alimentar/:id',
+          name: 'paciente-plano-alimentar',
+          component: PlanoAlimentarView
+        },
         {
           path: '/dashboard/receitas',
           name: 'receitas',

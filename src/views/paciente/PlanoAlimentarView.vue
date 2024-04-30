@@ -1,4 +1,5 @@
 <script setup>
+import RefeicaoCard from '@/components/RefeicaoCard.vue';
 import api from '@/services/api';
 import { onBeforeMount, ref } from 'vue';
 
@@ -41,7 +42,13 @@ const unitsDictionary = {
 
 <template>
     <div class="container">
-        <div v-if="loading"> Carregando... </div>
+        <div v-if="loading"> 
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
 
         <div v-else>
             <div class="row mb-4">
@@ -85,11 +92,15 @@ const unitsDictionary = {
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+registro.data" aria-expanded="true" aria-controls="collapseOne">
                             {{ registro.data }}
                         </button>
+                        <div class="row m-3">
+                            <h5 class="col">Refeições para esse dia</h5>
+                            <button class="btn btn-sono col"><i class="bi bi-moon-fill"></i> Registrar sono</button>
+                        </div>
                     </h2>
                     <div :id="registro.data" class="accordion-collapse collapse show" data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
                             <div v-for="refeicao in registro.refeicoes">
-                                {{refeicao.receitaEscolhida}}
+                                <RefeicaoCard :refeicao="refeicao" />
                             </div>
                         </div>
                     </div>
@@ -99,4 +110,12 @@ const unitsDictionary = {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.btn-sono {
+    background-color: #0038a1;
+    color: white;
+}
+.btn-sono:hover {
+    background-color: #0056b3;
+}
+</style>

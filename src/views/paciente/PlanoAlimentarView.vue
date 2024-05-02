@@ -93,8 +93,8 @@ const unitsDictionary = {
                             {{ registro.data }}
                         </button>
                         <div class="row m-3">
-                            <h5 class="col">Refeições para esse dia</h5>
-                            <button class="btn btn-sono col"><i class="bi bi-moon-fill"></i> Registrar sono</button>
+                            <button class="btn btn-sono col mx-3"><i class="bi bi-moon-fill"></i> Registrar sono</button>
+                            <button class="btn btn-sono col mx-3"><i class="bi bi-heart-pulse-fill"></i> Registrar sintoma</button>
                         </div>
                     </h2>
                     <div :id="registro.data" class="accordion-collapse collapse show" data-bs-parent="#accordionRegistrosDiarios">

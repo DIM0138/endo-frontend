@@ -1,15 +1,21 @@
 <script setup>
 import RefeicaoCard from '@/components/RefeicaoCard.vue';
+import RegistrarSonoModal from '@/components/RegistrarSonoModal.vue';
+import RegistrarSintomaModal from '@/components/RegistrarSintomaModal.vue';
 import api from '@/services/api';
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const planoAlimentar = ref(null);
 const listaDeCompras = ref(null);
 const loading = ref(true);
+const idPaciente = ref(null);
 
 onBeforeMount(async () => {
+    idPaciente.value = useRoute().params.id;
+
     try {
-        const response = await api.get('/pacientes/1/plano-alimentar');
+        const response = await api.get(`/pacientes/${idPaciente.value}/plano-alimentar`);
         planoAlimentar.value = response.data;
         loading.value = false;
     } catch (error) {
@@ -92,15 +98,24 @@ const unitsDictionary = {
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+registro.data" aria-expanded="true" aria-controls="collapseOne">
                             {{ registro.data }}
                         </button>
-                        <div class="row m-3">
-                            <button class="btn btn-sono col mx-3"><i class="bi bi-moon-fill"></i> Registrar sono</button>
-                            <button class="btn btn-sono col mx-3"><i class="bi bi-heart-pulse-fill"></i> Registrar sintoma</button>
-                        </div>
                     </h2>
+                        <div class="row m-3">
+                            <button 
+                                class="btn btn-sono col mx-3"
+                                data-bs-toggle="modal" :data-bs-target="'#registrarSonoModal'+registro.id"
+                            ><i class="bi bi-moon-fill"></i> Registrar sono</button>
+                            <RegistrarSonoModal :idRegistro="registro.id" :idPaciente="idPaciente" :sonoRegistro="registro.qualidadeSono"/>
+                            <button 
+                                class="btn btn-sono col mx-3"
+                                data-bs-toggle="modal" :data-bs-target="'#registrarSintomaModal'+registro.id"
+                            ><i class="bi bi-heart-pulse-fill"></i> Registrar sintoma</button>
+                            <RegistrarSintomaModal :idRegistro="registro.id" :idPaciente="idPaciente" :sintomas="registro.sintomas"/>
+                        </div>
+                    
                     <div :id="registro.data" class="accordion-collapse collapse show" data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
                             <div v-for="refeicao in registro.refeicoes">
-                                <RefeicaoCard :refeicao="refeicao" />
+                                <RefeicaoCard :refeicao="refeicao" :idPaciente="idPaciente" />
                             </div>
                         </div>
                     </div>

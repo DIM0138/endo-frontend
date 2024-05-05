@@ -2,37 +2,38 @@
 import api from '@/services/api';
 import { ref } from 'vue'
 
-const { refeicaoId, idPaciente } = defineProps(['refeicaoId', 'idPaciente'])
+const { idRegistro, idPaciente, sonoRegistro } = defineProps(['idRegistro', 'idPaciente', 'sonoRegistro']);
 
-const emocao = ref('PENDENTE')
+const sono = ref('PENDENTE')
 
 const submitForm = async () => {
   try {
-    await api.post('/planos-alimentares/refeicoes/responder', {
-        id: refeicaoId,
-        emocao: emocao.value,
-        refeicaoFeita: true
+    await api.post('/planos-alimentares/registros-diarios/responder', {
+        id: idRegistro,
+        qualidadeSono: sono.value,
     }).then(() => {
+        console.log('Sono registrado com sucesso!')
         window.location.href = `/dashboard/paciente/plano-alimentar/${idPaciente}`
     })   
   } catch (error) {
     console.error(error)
   }
 }
+
 </script>
 
 <template>
   <div
     class="modal fade"
-    :id="'registroModal' + refeicaoId"
+    :id="'registrarSonoModal'+idRegistro"
     tabindex="-1"
-    aria-labelledby="registroModalLabel"
+    aria-labelledby="registrarSonoModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 registroModalLabel">Registrar refeição</h1>
+          <h1 class="modal-title fs-5 registrarSonoModalLabel">Registrar sono</h1>
           <button
             type="button"
             class="btn-close"
@@ -41,15 +42,20 @@ const submitForm = async () => {
           ></button>
         </div>
         <form @submit.prevent="submitForm">
-          <div class="modal-body py-5">
-            <label>Como você se sentiu ao fazer essa refeição? </label>
-            <select v-model="emocao" class="form-select">
-              <option selected>Selecione uma emoção</option>
-              <option value="FELIZ">Feliz</option>
-              <option value="TRISTE">Triste</option>
-              <option value="NEUTRO">Neutro</option>
-              <option value="ESTRESSADO">Estressado</option>
-              <option value="ANSIOSO">Ansioso</option>
+          <div class="modal-body py-4">
+            <div v-if="sonoRegistro != 'PENDENTE'">
+                <p>Registro de hoje: {{ sonoRegistro }}</p>
+
+                Deseja alterar o registro?
+            </div>
+
+            <label>Como você avalia seu sono hoje?</label>
+            <select v-model="sono" class="form-select">
+              <option value="EXCELENTE">Excelente</option>
+              <option value="BOM">Bom</option>
+              <option value="REGULAR">Regular</option>
+              <option value="RUIM">Ruim</option>
+              <option value="PESSIMO">Péssimo</option>
               <option value="PENDENTE">Pendente</option>
             </select>
           </div>

@@ -1,5 +1,10 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+
+// NOTE(Amanda): Implementar uma forma de verificar o papel do usuário e restringir os botões, quando as rotas forem definidas.
+// const isNutricionista = () => {
+//     return useRoute().path.includes('/nutricionista/');
+// };
 </script>
 
 <template>
@@ -10,7 +15,6 @@ import { RouterView } from 'vue-router'
                 <router-link class="dashboard-menu-link" to="/dashboard">
                     <i class="bi bi-house-fill me-1"></i>
                     Página inicial</router-link>
-
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
                     to="/dashboard/planos-alimentares"><i class="bi bi-journal-medical me-1"></i>Planos
                     alimentares</router-link>

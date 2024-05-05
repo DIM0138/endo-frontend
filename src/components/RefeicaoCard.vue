@@ -1,7 +1,7 @@
 <script setup>
 import ReceitaModal from '@/components/ReceitaModal.vue';
 import RegistrarRefeicaoModal from '@/components/RegistrarRefeicaoModal.vue';
-const { refeicao } = defineProps(['refeicao']);
+const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
 
 </script>
 
@@ -25,7 +25,7 @@ const { refeicao } = defineProps(['refeicao']);
                     class="btn btn-refeicao me-2" :disabled="refeicao.refeicaoFeita"
                     data-bs-toggle="modal" :data-bs-target="'#registroModal'+refeicao.id"
                 ><i class="bi bi-check"></i> Registrar</button>
-                <RegistrarRefeicaoModal :refeicaoId="refeicao.id" />
+                <RegistrarRefeicaoModal :refeicaoId="refeicao.id" :idPaciente="idPaciente" />
                 <button 
                     class="btn btn-refeicao me-2"
                     data-bs-toggle="modal" :data-bs-target="'#receitaModal'+refeicao.receitaEscolhida.id"

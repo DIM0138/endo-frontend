@@ -10,6 +10,7 @@ import PlanosAlimentaresView from '@/views/PlanosAlimentaresView.vue'
 import PlanoAlimentarCard from '@/components/PlanoAlimentarCard.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
+import MetricasView from '@/views/MetricasView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,7 +77,13 @@ const router = createRouter({
           path: '/dashboard/perfil',
           name: 'perfil',
           component: PerfilView
+        },
+        {
+          path: '/dashboard/metricas/:id',
+          name: 'metricas',
+          component: MetricasView
         }
+
       ]
     }
   ]

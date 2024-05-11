@@ -1,13 +1,22 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, reactive, ref, watch } from 'vue';
 import api from '@/services/api';
 
 // CARREGAR RECEITAS
 const pacientes = ref();
+const pacientesFiltrados = reactive({});
 onBeforeMount(async () => {
     const response = await api.get('/nutricionistas/1/pacientes');
     pacientes.value = response.data;
-    console.log(pacientes.value)
+    pacientesFiltrados.value = pacientes.value;
+})
+
+// FILTRO DE PACIENTES
+const pesquisaNome = ref('');
+watch(pesquisaNome, () => {
+    pacientesFiltrados.value = pacientes.value.filter(paciente => {
+        return paciente.nomeCompleto.toLowerCase().includes(pesquisaNome.value.toLowerCase());
+    })
 })
 </script>
 
@@ -24,25 +33,20 @@ onBeforeMount(async () => {
 
                 <div class="col-10 col-md-5">
                     <div class="input-group">
-                        <label for="pesquisaRefeicao" class="input-group-text">
+                        <label for="pesquisaPaciente" class="input-group-text">
                             <i class="bi bi-funnel-fill me-1"></i>Nome </label>
-                        <input v-model="pesquisaNome" class="form-control inline" type="text" id="pesquisaRefeicao">
+                        <input v-model="pesquisaNome" class="form-control inline" type="text" id="pesquisaPaciente">
                     </div>
                 </div>
 
                 <div class="div col-10 col-md-5 m-3">
                     <div class="input-group">
-                        <label for="pesquisaRefeicao" class="input-group-text">
+                        <label for="filtroPacientes" class="input-group-text">
                             <i class=" bi bi-funnel-fill me-1"></i>
                             Tipo </label>
 
-                        <select class="form-select" v-model="tipoEscolhido">
+                        <select class="form-select" id="filtroPacientes">
                             <option value="TODOS">Todos</option>
-                            <option value="CAFE">Café da Manhã</option>
-                            <option value="ALMOCO">Almoço</option>
-                            <option value="JANTAR">Jantar</option>
-                            <option value="LANCHE">Lanche</option>
-                            <option value="OUTRO">Outros</option>
                         </select>
                     </div>
                 </div>
@@ -62,7 +66,7 @@ onBeforeMount(async () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="paciente in pacientes" :key="paciente.id">
+                    <tr v-for="paciente in pacientesFiltrados.value" :key="paciente.id">
                         <th scope="row">{{ paciente.id }}</th>
                         <td>{{ paciente.nomeCompleto }}</td>
                         <td>{{ paciente.email }}</td>

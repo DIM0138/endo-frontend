@@ -1,15 +1,12 @@
 <script setup>
-import { ref } from 'vue';
 import { RouterView } from 'vue-router'
 import NavigationMenu from './components/NavigationMenu.vue'
-
-const userType = ref("PUBLICO");
 
 </script>
 
 <template>
   <div class="app container-fluid">
-    <NavigationMenu :userType="userType" />
+    <NavigationMenu />
     <RouterView />
   </div>
 </template>

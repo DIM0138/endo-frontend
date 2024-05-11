@@ -8,42 +8,42 @@ import { RouterView } from 'vue-router'
         <div class="row my-4">
             <div class="col-3 d-none d-md-block align-items-center">
 
-                <router-link class="dashboard-menu-link" to="/dashboard">
+                <router-link class="dashboard-menu-link" to="/paciente/1">
                     <i class="bi bi-house-fill me-1"></i>
                     Página inicial</router-link>
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/dashboard/planos-alimentares"><i class="bi bi-journal-medical me-1"></i>Planos
-                    alimentares</router-link>
+                    to="/paciente/1/plano-alimentar"><i class="bi bi-journal-medical me-1"></i>Plano
+                    Alimentar</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/dashboard/receitas"><i class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                    to="/paciente/1/relatorios"><i class="bi bi-egg-fill me-1"></i>Relatórios</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/dashboard/pacientes"><i class="bi bi-people-fill me-1"></i>Pacientes</router-link>
+                    to="/paciente/1/metricas"><i class="bi bi-people-fill me-1"></i>Métricas</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/dashboard/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
+                    to="/paciente/1/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
 
             </div>
 
             <div class="d-md-none fixed-bottom my-2">
                 <div class="mobile-menu container-fluid">
                     <div class="d-flex justify-content-between">
-                        <router-link class="mobile-menu-link" to="/dashboard"><i
+                        <router-link class="mobile-menu-link" to="/paciente/1"><i
                                 class="bi bi-house-fill me-1"></i>Início</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/dashboard/planos-alimentares"><i
-                                class="bi bi-journal-medical me-1"></i>Planos</router-link>
+                            to="/paciente/1/plano-alimentar"><i class="bi bi-journal-medical me-1"></i>Plano
+                            Atual</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/dashboard/receitas"><i class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                            to="/paciente/1/relatorios"><i class="bi bi-egg-fill me-1"></i>Receitas</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/dashboard/pacientes"><i class="bi bi-people-fill me-1"></i>Pacientes</router-link>
+                            to="/paciente/1/metricas"><i class="bi bi-people-fill me-1"></i>Pacientes</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/dashboard/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
+                            to="/paciente/1/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
                     </div>
                 </div>
             </div>

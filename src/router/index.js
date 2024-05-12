@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SobreView from '@/views/SobreView.vue'
 import CadastroView from '@/views/CadastroView.vue'
-import ReceitasView from '@/views/ReceitasView.vue'
+import ReceitasView from '@/views/nutricionista/ReceitasView.vue'
 import DashboardViewNutricionista from '@/views/nutricionista/DashboardViewNutricionista.vue'
 import DashboardViewPaciente from '@/views/paciente/DashboardViewPaciente.vue'
-import PacientesView from '@/views/PacientesView.vue'
+import PacientesView from '@/views/nutricionista/PacientesView.vue'
 import PacienteCard from '@/components/PacienteCard.vue'
 import PlanosAlimentaresView from '@/views/PlanosAlimentaresView.vue'
 import PlanoAlimentarCard from '@/components/PlanoAlimentarCard.vue'
@@ -38,7 +38,7 @@ const router = createRouter({
     },
     {
       path: '/nutricionista/:id',
-      name: 'nutricionistaDashboard',
+      name: 'nutricionista-dashboard',
       component: DashboardViewNutricionista,
       children: [
         {
@@ -48,7 +48,7 @@ const router = createRouter({
         },
         {
           path: 'planos-alimentares',
-          name: 'planos-alimentares',
+          name: 'nutricionista-planos-alimentares',
           component: PlanosAlimentaresView,
           children: [
             {
@@ -60,12 +60,12 @@ const router = createRouter({
         },
         {
           path: 'receitas',
-          name: 'receitas',
+          name: 'nutricionista-receitas',
           component: ReceitasView
         },
         {
           path: 'pacientes',
-          name: 'pacientes',
+          name: 'nutricionista-pacientes',
           component: PacientesView,
           children: [
             {
@@ -103,6 +103,10 @@ const router = createRouter({
           component: MetricasView
         }
       ]
+    },
+    {
+      path: '/:catchAll(.*)',
+      redirect: '/'
     }
   ]
 })

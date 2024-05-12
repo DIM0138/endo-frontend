@@ -1,8 +1,9 @@
 <script setup>
 import { onBeforeMount, reactive, ref, watch } from 'vue';
 import api from '@/services/api';
+import NovoPacienteModal from '@/components/NovoPacienteModal.vue';
 
-// CARREGAR RECEITAS
+// CARREGAR PACIENTES
 const pacientes = ref();
 const pacientesFiltrados = reactive({});
 onBeforeMount(async () => {
@@ -25,9 +26,12 @@ watch(pesquisaNome, () => {
         <div>
             <div class="row">
                 <h3 class="col">Meus Pacientes</h3>
-                <button class="btn btn-paciente col-5 col-md-3"><i class="bi bi-plus-circle-fill me-1"></i>Adicionar
+                <button class="btn btn-paciente col-5 col-md-3" data-bs-toggle="modal"
+                    data-bs-target="#novoPacienteModal"><i class="bi bi-plus-circle-fill me-1"></i>Adicionar
                     Paciente</button>
             </div>
+
+            <NovoPacienteModal />
 
             <div class="row d-flex justify-content-center align-items-center m-3">
 
@@ -63,6 +67,7 @@ watch(pesquisaNome, () => {
                         <th scope="col">Email</th>
                         <th scope="col">Telefone</th>
                         <th scope="col">Gênero</th>
+                        <th scope="col">Token</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +77,7 @@ watch(pesquisaNome, () => {
                         <td>{{ paciente.email }}</td>
                         <td>{{ paciente.telefone }}</td>
                         <td>{{ paciente.genero }}</td>
+                        <td><small>{{ paciente.token }}</small></td>
                         <td><button class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></button>
                         </td>
                     </tr>

@@ -7,8 +7,9 @@ const planosAlimentares = ref();
 onBeforeMount(async () => {
     const response = await api.get('/planos-alimentares/nutricionista/1');
     planosAlimentares.value = response.data;
-    console.log(planosAlimentares.value)
 })
+
+
 
 </script>
 

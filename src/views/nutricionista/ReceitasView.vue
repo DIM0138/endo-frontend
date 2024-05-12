@@ -1,5 +1,6 @@
 <script setup>
 import ReceitaCard from '@/components/ReceitaCard.vue';
+import NovaReceitaModal from '@/components/NovaReceitaModal.vue';
 import api from '@/services/api';
 import { onBeforeMount, reactive, ref, watch } from 'vue';
 
@@ -27,11 +28,12 @@ watch([pesquisaNome, tipoEscolhido], () => {
 
 <template>
     <div class="container-fluid">
-
+        <NovaReceitaModal />
         <div class="header sticky-top">
             <div class="row">
                 <h3 class="col">Receitas disponíveis</h3>
-                <button class="btn btn-receita col-5 col-md-3"><i class="bi bi-plus-circle-fill me-1"></i>Adicionar
+                <button class="btn btn-receita col-5 col-md-3" data-bs-toggle="modal"
+                    data-bs-target="#novaReceitaModal"><i class="bi bi-plus-circle-fill me-1"></i>Adicionar
                     receita</button>
             </div>
 

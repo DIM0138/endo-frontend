@@ -16,10 +16,10 @@ import { RouterView } from 'vue-router'
                     Alimentar</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/paciente/1/relatorios"><i class="bi bi-egg-fill me-1"></i>Relatórios</router-link>
+                    to="/paciente/1/relatorios"><i class="bi bi-journal-text me-1"></i>Relatórios</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/paciente/1/metricas"><i class="bi bi-people-fill me-1"></i>Métricas</router-link>
+                    to="/paciente/1/metricas"><i class="bi bi-graph-up-arrow me-1"></i>Métricas</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
                     to="/paciente/1/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>

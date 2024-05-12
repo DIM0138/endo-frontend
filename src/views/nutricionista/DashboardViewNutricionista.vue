@@ -1,50 +1,82 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import { onBeforeMount, ref } from 'vue'
+import api from '@/services/api';
+
+const nutricionista = ref();
+const route = useRoute();
+const nutricionistaId = ref(route.params.id);
+const found = ref(false);
+
+onBeforeMount(async () => {
+    const response = await api.get("/nutricionistas/" + nutricionistaId.value)
+    .then(() => {
+        found.value = true;
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    nutricionista.value = response.data;
+})
+
+
 
 </script>
 
 <template>
-    <div class="container-md py-5">
+    <div v-if="!found" class="d-flex justify-content-center">
+            <div class="display-1">Usuário não encontrado.</div>
+        </div>
+    <div class="container-md py-5" v-if="found">
+        
         <div class="row my-4">
             <div class="col-3 d-none d-md-block align-items-center">
 
-                <router-link class="dashboard-menu-link" to="/nutricionista/1">
+                <router-link class="dashboard-menu-link"
+                    :to="{ name: 'nutricionista-dashboard', params: { id: nutricionistaId } }">
                     <i class="bi bi-house-fill me-1"></i>
                     Página inicial</router-link>
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/nutricionista/1/planos-alimentares"><i class="bi bi-journal-medical me-1"></i>Planos
+                    :to="{ name: 'nutricionista-planos-alimentares', params: { id: nutricionistaId } }"><i
+                        class="bi bi-journal-medical me-1"></i>Planos
                     alimentares</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/nutricionista/1/receitas"><i class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                    :to="{ name: 'nutricionista-receitas', params: { id: nutricionistaId } }"><i
+                        class="bi bi-egg-fill me-1"></i>Receitas</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/nutricionista/1/pacientes"><i class="bi bi-people-fill me-1"></i>Pacientes</router-link>
+                    :to="{ name: 'nutricionista-pacientes', params: { id: nutricionistaId } }"><i
+                        class="bi bi-people-fill me-1"></i>Pacientes</router-link>
 
                 <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                    to="/nutricionista/1/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
+                    :to="{ name: 'nutricionista-perfil', params: { id: nutricionistaId } }"><i
+                        class="bi bi-person-circle me-1"></i>Perfil</router-link>
 
             </div>
 
             <div class="d-md-none fixed-bottom my-2">
                 <div class="mobile-menu container-fluid">
                     <div class="d-flex justify-content-between">
-                        <router-link class="mobile-menu-link" to="/nutricionista/1"><i
+                        <router-link class="mobile-menu-link"
+                            :to="{ name: 'nutricionista-dashboard', params: { id: nutricionistaId } }"><i
                                 class="bi bi-house-fill me-1"></i>Início</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/nutricionista/1/planos-alimentares"><i
+                            :to="{ name: 'nutricionista-planos-alimentares', params: { id: nutricionistaId } }"><i
                                 class="bi bi-journal-medical me-1"></i>Planos</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/nutricionista/1/receitas"><i class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                            :to="{ name: 'nutricionista-receitas', params: { id: nutricionistaId } }"><i
+                                class="bi bi-egg-fill me-1"></i>Receitas</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/nutricionista/1/pacientes"><i
+                            :to="{ name: 'nutricionista-pacientes', params: { id: nutricionistaId } }"><i
                                 class="bi bi-people-fill me-1"></i>Pacientes</router-link>
 
                         <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                            to="/nutricionista/1/perfil"><i class="bi bi-person-circle me-1"></i>Perfil</router-link>
+                            :to="{ name: 'nutricionista-perfil', params: { id: nutricionistaId } }"><i
+                                class="bi bi-person-circle me-1"></i>Perfil</router-link>
                     </div>
                 </div>
             </div>

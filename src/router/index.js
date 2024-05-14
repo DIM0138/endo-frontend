@@ -79,7 +79,7 @@ const router = createRouter({
     },
     {
       path: '/paciente/:id',
-      name: 'pacienteDashboard',
+      name: 'paciente-dashboard',
       component: DashboardViewPaciente,
       children: [
         {

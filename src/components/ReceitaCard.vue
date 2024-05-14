@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import ReceitaModal from './ReceitaModal.vue';
+import EditarReceitaModal from './EditarReceitaModal.vue';
 
-const { receita } = defineProps(['receita']);
-const emit = defineEmits(['consultarReceita']);
+const { receita, enableOptions } = defineProps(['receita', 'enableOptions']);
 
 const tipoRefeicao = ref("")
 
@@ -18,15 +19,11 @@ if (receita.tipoRefeicao == "CAFE") {
     tipoRefeicao.value = "Outro"
 }
 
-const consultarReceita = () => {
-    emit('consultarReceita', receita.id)
-}
-
 </script>
 
 <template>
     <div class="col mb-4">
-        <div class="card h-100" @click="consultarReceita">
+        <div class="card h-100">
             <img :src="receita.imagemURL" class="card-img-top card-image" alt="Imagem da receita">
             <div class="card-body">
                 <p class="card-title">{{ receita.nome }}</p>
@@ -41,6 +38,17 @@ const consultarReceita = () => {
                         <span><i class="bi bi-clock-history"></i> {{ receita.tempoPreparo }} min</span>
                     </small>
                 </div>
+                <div v-if="enableOptions" class="row mt-1 d-flex justify-content-center gap-2">
+                    <button class="col btn-receita" data-bs-toggle="modal"
+                        :data-bs-target="'#receitaModal' + receita.id" title="Visualizar Receita"><i
+                            class="bi bi-card-text"></i></button>
+                    <button class="col btn-receita" data-bs-toggle="modal"
+                        :data-bs-target="'#editarReceitaModal' + receita.id" title="Editar Receita"><i
+                            class="bi bi-pencil-square"></i></button>
+                </div>
+
+                <ReceitaModal :receita="receita" />
+                <EditarReceitaModal :receitaOriginal="receita" />
             </div>
         </div>
     </div>
@@ -59,5 +67,22 @@ const consultarReceita = () => {
 
 .card-title {
     color: #8A0B01;
+}
+
+.btn-receita {
+    background-color: #F8694D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.btn-receita:hover {
+    background-color: #d65b43;
+}
+
+.btn-receita:active {
+    color: #DADADA;
 }
 </style>

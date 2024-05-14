@@ -69,7 +69,8 @@ watch([pesquisaNome, tipoEscolhido], () => {
         <hr />
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
             <KeepAlive>
-                <ReceitaCard v-for="receita in receitasFiltradas" :receita="receita" :key="receita.id" />
+                <ReceitaCard v-for="receita in receitasFiltradas" :receita="receita" :key="receita.id"
+                    :enableOptions="true" />
             </KeepAlive>
         </div>
     </div>

@@ -3,7 +3,7 @@ import RefeicaoCard from '@/components/RefeicaoCard.vue';
 import RegistrarSonoModal from '@/components/RegistrarSonoModal.vue';
 import RegistrarSintomaModal from '@/components/RegistrarSintomaModal.vue';
 import api from '@/services/api';
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const planoAlimentar = ref(null);
@@ -34,21 +34,21 @@ const generateListaDeCompras = async (idPlanoAlimentar) => {
 }
 
 const unitsDictionary = {
-  QUILOS: 'Kg',
-  GRAMAS: 'Gramas',
-  LITROS: 'Litros',
-  MILILITROS: 'Ml',
-  XICARAS: 'Xícaras',
-  COLHER_DE_SOPA: 'Colher de Sopa',
-  COLHER_DE_CHA: 'Colher de Chá',
-  UNIDADE: 'Unidade(s)'
+    QUILOS: 'Kg',
+    GRAMAS: 'Gramas',
+    LITROS: 'Litros',
+    MILILITROS: 'Ml',
+    XICARAS: 'Xícaras',
+    COLHER_DE_SOPA: 'Colher de Sopa',
+    COLHER_DE_CHA: 'Colher de Chá',
+    UNIDADE: 'Unidade(s)'
 };
 
 </script>
 
 <template>
     <div class="container">
-        <div v-if="loading"> 
+        <div v-if="loading">
             <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -59,62 +59,64 @@ const unitsDictionary = {
         <div v-else>
             <div class="row mb-4">
                 <h4 class="col">Plano alimentar atual</h4>
-                <button
-                    @click="generateListaDeCompras(planoAlimentar.id)" 
-                    class="col btn btn-secondary"
-                    data-bs-toggle="modal" data-bs-target="#listaComprasModal"
-                >
+                <button @click="generateListaDeCompras(planoAlimentar.id)" class="col btn btn-secondary"
+                    data-bs-toggle="modal" data-bs-target="#listaComprasModal">
                     <i class="bi bi-basket2-fill me-1"></i>
                     Lista de compras
                 </button>
-                <div class="modal fade" id="listaComprasModal" tabindex="-1" aria-labelledby="listaComprasModalLabel" aria-hidden="true">
+                <div class="modal fade" id="listaComprasModal" tabindex="-1" aria-labelledby="listaComprasModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de compras</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <ul v-if="listaDeCompras">
-                                <li v-for="item in listaDeCompras.itens">
-                                    {{ item.quantidadeTotal }} {{ unitsDictionary[item.metrica] }} de <span class="text-lowercase">{{ item.ingrediente }}</span>
-                                </li>
-                            </ul>
-                            <div v-else>
-                                Nenhum item na Lista
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de compras</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary">Exportar</button>
-                        </div>
+                            <div class="modal-body">
+                                <ul v-if="listaDeCompras">
+                                    <li v-for="(item, index) in listaDeCompras.itens" :key="index">
+                                        {{ item.quantidadeTotal }} {{ unitsDictionary[item.metrica] }} de <span
+                                            class="text-lowercase">{{ item.ingrediente }}</span>
+                                    </li>
+                                </ul>
+                                <div v-else>
+                                    Nenhum item na Lista
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary">Exportar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="accordion" id="accordionRegistrosDiarios">
-                <div v-for="registro in planoAlimentar.registrosDiarios" class="accordion-item">
+                <div v-for="(registro, index) in planoAlimentar.registrosDiarios" class="accordion-item" :key="index">
                     <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+registro.data" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            :data-bs-target="'#' + registro.data" aria-expanded="true" aria-controls="collapseOne">
                             {{ registro.data }}
                         </button>
                     </h2>
-                        <div class="row m-3">
-                            <button 
-                                class="btn btn-sono col mx-3"
-                                data-bs-toggle="modal" :data-bs-target="'#registrarSonoModal'+registro.id"
-                            ><i class="bi bi-moon-fill"></i> Registrar sono</button>
-                            <RegistrarSonoModal :idRegistro="registro.id" :idPaciente="idPaciente" :sonoRegistro="registro.qualidadeSono"/>
-                            <button 
-                                class="btn btn-sono col mx-3"
-                                data-bs-toggle="modal" :data-bs-target="'#registrarSintomaModal'+registro.id"
-                            ><i class="bi bi-heart-pulse-fill"></i> Registrar sintoma</button>
-                            <RegistrarSintomaModal :idRegistro="registro.id" :idPaciente="idPaciente" :sintomas="registro.sintomas"/>
-                        </div>
-                    
-                    <div :id="registro.data" class="accordion-collapse collapse show" data-bs-parent="#accordionRegistrosDiarios">
+                    <div class="row m-3">
+                        <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
+                            :data-bs-target="'#registrarSonoModal' + registro.id"><i class="bi bi-moon-fill"></i>
+                            Registrar sono</button>
+                        <RegistrarSonoModal :idRegistro="registro.id" :idPaciente="idPaciente"
+                            :sonoRegistro="registro.qualidadeSono" />
+                        <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
+                            :data-bs-target="'#registrarSintomaModal' + registro.id"><i
+                                class="bi bi-heart-pulse-fill"></i> Registrar sintoma</button>
+                        <RegistrarSintomaModal :idRegistro="registro.id" :idPaciente="idPaciente"
+                            :sintomas="registro.sintomas" />
+                    </div>
+
+                    <div :id="registro.data" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
-                            <div v-for="refeicao in registro.refeicoes">
+                            <div v-for="(refeicao, index) in registro.refeicoes" :key="index">
                                 <RefeicaoCard :refeicao="refeicao" :idPaciente="idPaciente" />
                             </div>
                         </div>
@@ -130,6 +132,7 @@ const unitsDictionary = {
     background-color: #0038a1;
     color: white;
 }
+
 .btn-sono:hover {
     background-color: #0056b3;
 }

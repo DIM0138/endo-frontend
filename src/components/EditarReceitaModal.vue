@@ -1,45 +1,23 @@
 <script setup>
-import { reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { reactive } from 'vue';
 import api from '@/services/api';
 
-const idNutricionista = ref(useRoute().params.id);
+const { receitaOriginal } = defineProps(['receitaOriginal']);
+const receita = reactive(receitaOriginal)
 
 const submitForm = (async () => {
-    const response = await api.post('/receitas/novo', receita)
+    console.log(receita)
+    await api.patch('/receitas/atualizar/' + receitaOriginal.id)
         .then(() => {
-            console.log('Receita adicionada com sucesso!')
             window.location.reload()
         })
         .catch((error) => {
             console.error(error)
         })
-    console.log(response.data)
-})
-
-const receita = reactive({
-    nutricionista: idNutricionista.value,
-    tipoRefeicao: '',
-    nome: '',
-    descricao: '',
-    tempoPreparo: 0,
-    calorias: 0,
-    imagemURL: '',
-    modoPreparo: [""],
-    ingredientes: [
-        {
-            ingrediente: {
-                nome: '',
-                medida: '',
-            }
-        }
-    ],
-    contemAlergicos: false,
-    alergicos: []
 })
 
 const adicionarIngrediente = () => {
-    receita.ingredientes.push({
+    receita.value.ingredientes.push({
         ingrediente: {
             nome: '',
             medida: '',
@@ -49,54 +27,54 @@ const adicionarIngrediente = () => {
 }
 
 const removerIngrediente = (index) => {
-    if (receita.ingredientes.length == 1) {
+    if (receita.value.ingredientes.length == 1) {
         return;
     }
 
-    receita.ingredientes.splice(index, 1)
+    receita.value.ingredientes.splice(index, 1)
 }
 
 const adicionarPasso = () => {
-    receita.modoPreparo.push("")
+    receita.value.modoPreparo.push("")
 }
 
 const removerPasso = (index) => {
-    if (receita.modoPreparo.length == 1) {
+    if (receita.value.modoPreparo.length == 1) {
         return;
     }
 
-    receita.modoPreparo.splice(index, 1)
+    receita.value.modoPreparo.splice(index, 1)
 }
 
 const adicionarAlergico = () => {
-    receita.alergicos.push("")
+    receita.value.alergicos.push("")
 }
 
 const removerAlergico = (index) => {
-    if (receita.contemAlergicos && receita.alergicos.length == 1) {
+    if (receita.value.contemAlergicos && receita.value.alergicos.length == 1) {
         return;
     }
 
-    receita.alergicos.splice(index, 1)
+    receita.value.alergicos.splice(index, 1)
 }
 
 const toggleAlergicos = () => {
-    if (receita.contemAlergicos) {
-        receita.alergicos = [""]
+    if (receita.value.contemAlergicos) {
+        receita.value.alergicos = [""]
     }
     else {
-        receita.alergicos = []
+        receita.value.alergicos = []
     }
 }
 </script>
 
 <template>
-    <div class="modal fade" id="novaReceitaModal" tabindex="-1" aria-labelledby="novaReceitaModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" :id="'editarReceitaModal' + receita.id" tabindex="-1"
+        aria-labelledby="editarReceitaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 novaReceitaModalLabel">Nova Receita</h1>
+                    <h1 class="modal-title fs-5 editarReceitaModalLabel">Nova Receita</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form @submit.prevent="submitForm">
@@ -202,7 +180,7 @@ const toggleAlergicos = () => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-receita">Adicionar</button>
+                        <button type="submit" class="btn btn-receita">Atualizar</button>
                     </div>
                 </form>
             </div>

@@ -7,8 +7,7 @@ import DashboardViewNutricionista from '@/views/nutricionista/DashboardViewNutri
 import DashboardViewPaciente from '@/views/paciente/DashboardViewPaciente.vue'
 import PacientesView from '@/views/nutricionista/PacientesView.vue'
 import PacienteCard from '@/components/PacienteCard.vue'
-import PlanosAlimentaresView from '@/views/PlanosAlimentaresView.vue'
-import PlanoAlimentarCard from '@/components/PlanoAlimentarCard.vue'
+import PlanosAlimentaresView from '@/views/nutricionista/PlanosAlimentaresView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 import MetricasView from '@/views/MetricasView.vue'
@@ -49,14 +48,7 @@ const router = createRouter({
         {
           path: 'planos-alimentares',
           name: 'nutricionista-planos-alimentares',
-          component: PlanosAlimentaresView,
-          children: [
-            {
-              path: ':idPlanoAlimentar',
-              name: 'plano-alimentar',
-              component: PlanoAlimentarCard
-            }
-          ]
+          component: PlanosAlimentaresView
         },
         {
           path: 'receitas',

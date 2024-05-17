@@ -20,7 +20,7 @@ onBeforeMount(async () => {
         .catch((error) => {
             loading.value = false;
             found.value = false;
-            console.log(error);
+            console.log(error.response.data.message);
         })
 
 })

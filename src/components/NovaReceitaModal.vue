@@ -6,7 +6,10 @@ import api from '@/services/api';
 const idNutricionista = ref(useRoute().params.id);
 
 const submitForm = (async () => {
-    const response = await api.post('/receitas/novo', receita)
+    if (receita.imagemURL == '') {
+        receita.imagemURL = 'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg'
+    }
+    await api.post('/receitas/novo', receita)
         .then(() => {
             console.log('Receita adicionada com sucesso!')
             window.location.reload()
@@ -14,7 +17,6 @@ const submitForm = (async () => {
         .catch((error) => {
             console.error(error)
         })
-    console.log(response.data)
 })
 
 const receita = reactive({

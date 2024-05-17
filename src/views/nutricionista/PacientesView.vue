@@ -68,6 +68,7 @@ watch(pesquisaNome, () => {
                         <th scope="col">Telefone</th>
                         <th scope="col">Gênero</th>
                         <th scope="col">Token</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>

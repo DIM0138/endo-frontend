@@ -2,22 +2,24 @@
 import ReceitaCard from '@/components/ReceitaCard.vue';
 import NovaReceitaModal from '@/components/NovaReceitaModal.vue';
 import api from '@/services/api';
-import { onBeforeMount, reactive, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
 
 // CARREGAR RECEITAS
-const receitas = ref();
+let receitas;
+
 onBeforeMount(async () => {
     const response = await api.get('/receitas/todos');
-    receitas.value = response.data;
-    console.log(receitas.value)
+    receitas = response.data;
+    receitasFiltradas.value = receitas;
 })
 
 // FILTRO DE RECEITAS
-const receitasFiltradas = reactive(receitas);
+const receitasFiltradas = ref([]);
 const pesquisaNome = ref('');
 const tipoEscolhido = ref("TODOS");
 watch([pesquisaNome, tipoEscolhido], () => {
-    receitasFiltradas.value = receitas.value.filter(receita => {
+    console.log(pesquisaNome.value, tipoEscolhido.value, receitas, receitasFiltradas.value);
+    receitasFiltradas.value = receitas.filter(receita => {
         const nomeMatch = receita.nome.toLowerCase().includes(pesquisaNome.value.toLowerCase());
         const tipoMatch = tipoEscolhido.value === "TODOS" || receita.tipoRefeicao === tipoEscolhido.value;
         return nomeMatch && tipoMatch;

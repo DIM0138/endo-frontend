@@ -2,14 +2,22 @@
 import { onBeforeMount, reactive, ref, watch } from 'vue';
 import api from '@/services/api';
 import NovoPacienteModal from '@/components/NovoPacienteModal.vue';
+import NovoRelatorioModal from '@/components/NovoRelatorioModal.vue';
+import EditarPacienteModal from '@/components/EditarPacienteModal.vue';
+import MetricasPacienteModal from '@/components/MetricasPacienteModal.vue';
 
 // CARREGAR PACIENTES
 const pacientes = ref();
 const pacientesFiltrados = reactive({});
 onBeforeMount(async () => {
-    const response = await api.get('/nutricionistas/1/pacientes');
-    pacientes.value = response.data;
-    pacientesFiltrados.value = pacientes.value;
+    await api.get('/nutricionistas/1/pacientes')
+    .then((response) => {
+        pacientes.value = response.data;
+        pacientesFiltrados.value = pacientes.value;
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 })
 
 // FILTRO DE PACIENTES
@@ -79,8 +87,16 @@ watch(pesquisaNome, () => {
                         <td>{{ paciente.telefone }}</td>
                         <td>{{ paciente.genero }}</td>
                         <td><small>{{ paciente.token }}</small></td>
-                        <td><button class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></button>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-warning" title="Editar Paciente" data-bs-toggle="modal" :data-bs-target="'#editarPacienteModal' + paciente.id"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-outline-success" title="Adicionar Relatório" data-bs-toggle="modal" :data-bs-target="'#novoRelatorioModal' + paciente.id"><i class="bi bi-clipboard-plus"></i></button>
+                                <button class="btn btn-outline-primary" title="Visualizar Métricas" data-bs-toggle="modal" :data-bs-target="'#visualizarMetricasModal' + paciente.id"><i class="bi bi-clipboard-data"></i></button>
+                            </div>
                         </td>
+                        <NovoRelatorioModal :paciente="paciente" />
+                        <EditarPacienteModal :paciente="paciente"/>
+                        <MetricasPacienteModal :paciente="paciente" />
                     </tr>
                 </tbody>
             </table>

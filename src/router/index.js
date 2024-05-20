@@ -11,7 +11,6 @@ import PlanosAlimentaresView from '@/views/nutricionista/PlanosAlimentaresView.v
 import PerfilView from '@/views/PerfilView.vue'
 import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 import MetricasView from '@/views/MetricasView.vue'
-import RelatoriosView from '@/views/RelatoriosView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,11 +82,6 @@ const router = createRouter({
           path: 'plano-alimentar',
           name: 'paciente-plano-alimentar',
           component: PlanoAlimentarView
-        },
-        {
-          path: 'relatorios',
-          name: 'paciente-relatorios',
-          component: RelatoriosView
         },
         {
           path: 'metricas',

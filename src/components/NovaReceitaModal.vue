@@ -236,8 +236,4 @@ label {
     cursor: pointer;
     color: #dc3545;
 }
-
-.remover {
-    color: darkred;
-}
 </style>

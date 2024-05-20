@@ -9,7 +9,6 @@ const nomePaciente = ref('');
 const submitForm = (async () => {
     await api.get('/pacientes/token/novo', { params: { nomePaciente: nomePaciente.value, idNutricionista: nutricionistaId.value } })
         .then(() => {
-            console.log('Paciente adicionado com sucesso!')
             window.location.reload();
         })
         .catch((error) => {
@@ -36,7 +35,7 @@ const submitForm = (async () => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-salvar" data-bs-dismiss="modal">Adicionar</button>
+                        <button type="submit" class="btn btn-salvar">Adicionar</button>
                     </div>
                 </form>
             </div>

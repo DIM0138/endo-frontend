@@ -44,7 +44,6 @@ function validateAndFetchData() {
 }
 
 async function fetchData(dataInicio, dataFim) {
-  console.log(idPaciente.value)
   let filtro = ''
   if (dataInicio && dataFim) {
     filtro = `?inicio=${dataInicio}&fim=${dataFim}`

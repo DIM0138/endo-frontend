@@ -40,6 +40,11 @@ const router = createRouter({
       component: DashboardViewNutricionista,
       children: [
         {
+          path: 'metricas-paciente/:idPaciente',
+          name: 'metricas-paciente',
+          component: MetricasView
+        },
+        {
           path: 'perfil',
           name: 'nutricionista-perfil',
           component: PerfilView
@@ -63,13 +68,13 @@ const router = createRouter({
               path: ':idPaciente',
               name: 'paciente',
               component: PacienteCard
-            }
+            },
           ]
-        }
+        },
       ]
     },
     {
-      path: '/paciente/:id',
+      path: '/paciente/:idPaciente',
       name: 'paciente-dashboard',
       component: DashboardViewPaciente,
       children: [
@@ -91,8 +96,8 @@ const router = createRouter({
       ]
     },
     {
-      path: '/:catchAll(.*)',
-      redirect: '/'
+       path: '/:catchAll(.*)',
+       redirect: '/'
     }
   ]
 })

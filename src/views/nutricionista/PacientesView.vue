@@ -91,7 +91,8 @@ watch(pesquisaNome, () => {
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-warning" title="Editar Paciente" data-bs-toggle="modal" :data-bs-target="'#editarPacienteModal' + paciente.id"><i class="bi bi-pencil-square"></i></button>
                                 <button class="btn btn-outline-success" title="Adicionar Relatório" data-bs-toggle="modal" :data-bs-target="'#novoRelatorioModal' + paciente.id"><i class="bi bi-clipboard-plus"></i></button>
-                                <button class="btn btn-outline-primary" title="Visualizar Métricas" data-bs-toggle="modal" :data-bs-target="'#visualizarMetricasModal' + paciente.id"><i class="bi bi-clipboard-data"></i></button>
+                                <button class="btn btn-outline-primary" title="Visualizar Métricas" data-bs-toggle="modal" :data-bs-target="'#visualizarMetricasModal' + paciente.id"><i class="bi bi-clipboard-pulse"></i></button>
+                                <router-link :to="{ name: 'metricas-paciente', params: { idPaciente: paciente.id } }" class="btn btn-outline-info" title="Visualizar Gráficos"><i class="bi bi-clipboard-data"></i></router-link>
                             </div>
                         </td>
                         <NovoRelatorioModal :paciente="paciente" />

@@ -12,7 +12,7 @@ const loading = ref(true);
 const idPaciente = ref(null);
 
 onBeforeMount(async () => {
-    idPaciente.value = useRoute().params.id;
+    idPaciente.value = useRoute().params.idPaciente;
 
     try {
         const response = await api.get(`/pacientes/${idPaciente.value}/plano-alimentar`);

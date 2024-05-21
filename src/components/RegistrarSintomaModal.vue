@@ -13,7 +13,7 @@ const submitForm = async () => {
         sintomas: [sintoma.value],
     }).then(() => {
         console.log('Sintoma registrado com sucesso!')
-        window.location.href = `/dashboard/paciente/plano-alimentar/${idPaciente}`
+        window.location.reload();
     })   
   } catch (error) {
     console.error(error)

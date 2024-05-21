@@ -17,7 +17,7 @@ const submitForm = async () => {
         refeicaoFeita: refeicaoFeita.value,
       })
       .then(() => {
-        window.location.href = `/dashboard/paciente/plano-alimentar/${idPaciente}`
+        window.location.reload();
       })
   } catch (error) {
     console.error(error)

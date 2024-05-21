@@ -4,8 +4,7 @@ import { onBeforeMount, ref } from 'vue'
 import api from '@/services/api';
 
 const nutricionista = ref();
-const route = useRoute();
-const nutricionistaId = ref(route.params.id);
+const nutricionistaId = ref(useRoute().params.id);
 const found = ref(false);
 const loading = ref(true);
 
@@ -20,7 +19,12 @@ onBeforeMount(async () => {
         .catch((error) => {
             loading.value = false;
             found.value = false;
-            console.log(error.response.data.message);
+            if (error.code == 404) {
+                console.log(error.response.data.message);
+            }
+            else {
+                console.log(error);
+            }
         })
 
 })
@@ -42,7 +46,7 @@ onBeforeMount(async () => {
         <div v-if="!found" class="loading">
             <div class="h1">Usuário não encontrado.</div>
         </div>
-        <div class="container-md py-5" v-if="found">
+        <div v-else class="container-md py-5">
 
             <div class="row my-4">
                 <div class="col-3 d-none d-md-block align-items-center">

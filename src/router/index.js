@@ -6,11 +6,11 @@ import ReceitasView from '@/views/nutricionista/ReceitasView.vue'
 import DashboardViewNutricionista from '@/views/nutricionista/DashboardViewNutricionista.vue'
 import DashboardViewPaciente from '@/views/paciente/DashboardViewPaciente.vue'
 import PacientesView from '@/views/nutricionista/PacientesView.vue'
-import PacienteCard from '@/components/PacienteCard.vue'
 import PlanosAlimentaresView from '@/views/nutricionista/PlanosAlimentaresView.vue'
-import PerfilView from '@/views/PerfilView.vue'
+import PerfilViewNutricionista from '@/views/nutricionista/PerfilViewNutricionista.vue'
 import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 import MetricasView from '@/views/MetricasView.vue'
+import PerfilViewPaciente from '@/views/paciente/PerfilViewPaciente.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,7 +47,7 @@ const router = createRouter({
         {
           path: 'perfil',
           name: 'nutricionista-perfil',
-          component: PerfilView
+          component: PerfilViewNutricionista
         },
         {
           path: 'planos-alimentares',
@@ -62,15 +62,8 @@ const router = createRouter({
         {
           path: 'pacientes',
           name: 'nutricionista-pacientes',
-          component: PacientesView,
-          children: [
-            {
-              path: ':idPaciente',
-              name: 'paciente',
-              component: PacienteCard
-            },
-          ]
-        },
+          component: PacientesView
+        }
       ]
     },
     {
@@ -80,8 +73,8 @@ const router = createRouter({
       children: [
         {
           path: 'perfil',
-          name: 'perfil',
-          component: PerfilView
+          name: 'paciente-perfil',
+          component: PerfilViewPaciente
         },
         {
           path: 'plano-alimentar',
@@ -90,14 +83,14 @@ const router = createRouter({
         },
         {
           path: 'metricas',
-          name: 'metricas',
+          name: 'paciente-metricas',
           component: MetricasView
         }
       ]
     },
     {
-       path: '/:catchAll(.*)',
-       redirect: '/'
+      path: '/:catchAll(.*)',
+      redirect: '/'
     }
   ]
 })

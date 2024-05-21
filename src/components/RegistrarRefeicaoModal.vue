@@ -1,24 +1,29 @@
 <script setup>
-import api from '@/services/api';
+import api from '@/services/api'
 import { ref } from 'vue'
 
 const { refeicaoId, idPaciente } = defineProps(['refeicaoId', 'idPaciente'])
 
 const emocao = ref('PENDENTE')
+const refeicaoFeita = ref(false)
 
 const submitForm = async () => {
+  console.log(emocao.value, refeicaoFeita.value)
   try {
-    await api.post('/planos-alimentares/refeicoes/responder', {
+    await api
+      .post('/planos-alimentares/refeicoes/responder', {
         id: refeicaoId,
         emocao: emocao.value,
-        refeicaoFeita: true
-    }).then(() => {
+        refeicaoFeita: refeicaoFeita.value,
+      })
+      .then(() => {
         window.location.href = `/dashboard/paciente/plano-alimentar/${idPaciente}`
-    })   
+      })
   } catch (error) {
     console.error(error)
   }
 }
+
 </script>
 
 <template>
@@ -42,7 +47,21 @@ const submitForm = async () => {
         </div>
         <form @submit.prevent="submitForm">
           <div class="modal-body py-5">
-            <label>Como você se sentiu ao fazer essa refeição? </label>
+            <div class="form-check form-switch mb-4">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                v-model="refeicaoFeita"
+                checked
+              />
+              <label class="form-check-label" for="flexSwitchCheckChecked"
+                >Refeição feita</label
+              >
+            </div>
+
+            <label>Como você se sentiu? </label>
             <select v-model="emocao" class="form-select">
               <option selected>Selecione uma emoção</option>
               <option value="FELIZ">Feliz</option>

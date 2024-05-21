@@ -10,7 +10,7 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
         <div class="card mb-3">
             <div class="card-header">
                 <span><i class="bi bi-clock"></i> {{ refeicao.horario }}</span>
-                <span v-if="refeicao.refeicaoFeita" class="refeicao-feita"><i class="bi bi-check-circle"></i> Refeição feita</span>
+                <span v-if="refeicao.refeicaoFeita" class="refeicao-feita"><i class="bi bi-check-circle"></i> Refeição registrada</span>
             </div>
             <img :src="refeicao.receitaEscolhida.imagemURL" class="card-img-top" alt="...">
             <div class="card-body">

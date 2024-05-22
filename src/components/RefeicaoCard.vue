@@ -10,7 +10,8 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
         <div class="card mb-3">
             <div class="card-header">
                 <span><i class="bi bi-clock"></i> {{ refeicao.horario }}</span>
-                <span v-if="refeicao.refeicaoFeita" class="refeicao-feita"><i class="bi bi-check-circle"></i> Refeição feita</span>
+                <span v-if="refeicao.refeicaoFeita == true" class="refeicao-feita"><i class="bi bi-check-circle"></i> Refeição feita</span>
+                <span v-if="refeicao.refeicaoFeita == false" class="refeicao-feita"><i class="bi bi-x-circle"></i> Refeição não feita</span>
             </div>
             <img :src="refeicao.receitaEscolhida.imagemURL" class="card-img-top" alt="...">
             <div class="card-body">
@@ -22,7 +23,7 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
                 </h5>
                 <p class="card-text">{{refeicao.receitaEscolhida.descricao}}</p>
                 <button 
-                    class="btn btn-refeicao me-2" :disabled="refeicao.refeicaoFeita"
+                    class="btn btn-refeicao me-2" :disabled="refeicao.refeicaoFeita != null"
                     data-bs-toggle="modal" :data-bs-target="'#registroModal'+refeicao.id"
                 ><i class="bi bi-check"></i> Registrar</button>
                 <RegistrarRefeicaoModal :refeicaoId="refeicao.id" :idPaciente="idPaciente" />

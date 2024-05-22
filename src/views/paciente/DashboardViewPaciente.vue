@@ -6,8 +6,8 @@ import { RouterView } from 'vue-router'
   <div class="container-md py-5">
     <div class="row my-4">
       <div class="col-3 d-none d-md-block align-items-center">
-
-        <router-link class="dashboard-menu-link" to="/paciente/1">
+        <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
+          :to="{ name: 'pagina-inicial-paciente', params: { idPaciente: 1 } }">
           <i class="bi bi-house-fill me-1"></i>
           Página inicial</router-link>
         <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"

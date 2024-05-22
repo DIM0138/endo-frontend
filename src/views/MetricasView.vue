@@ -26,12 +26,12 @@ const componentKey = ref(0)
 const labelsAdesaoTag = ['CAFE', 'ALMOCO', 'JANTAR', 'LANCHE', 'OUTRO']
 const labelsReadAdesaoTag = ['Café da manhã', 'Almoço', 'Jantar', 'Lanche', 'Outro']
 
-const labelsEmocao = ['FELIZ', 'TRISTE', 'NEUTRO', 'ESTRESSADO', 'ANSIOSO', 'PENDENTE']
-const labelsReadEmocao = ['Feliz', 'Triste', 'Neutro', 'Estressado', 'Ansioso', 'Pendente']
+const labelsEmocao = ['FELIZ', 'TRISTE', 'NEUTRO', 'ESTRESSADO', 'ANSIOSO']
+const labelsReadEmocao = ['Feliz', 'Triste', 'Neutro', 'Estressado', 'Ansioso']
 const coresEmocao = ['#00A36C', '#2986cc', '#ffd966', '#e06666', '#e67f38', '#bcbcbc']
 
-const labelsSono = ['EXCELENTE', 'BOM', 'REGULAR', 'RUIM', 'PESSIMO', 'PENDENTE']
-const labelsReadSono = ['Excelente', 'Bom', 'Regular', 'Ruim', 'Péssimo', 'Pendente']
+const labelsSono = ['EXCELENTE', 'BOM', 'REGULAR', 'RUIM', 'PESSIMO']
+const labelsReadSono = ['Excelente', 'Bom', 'Regular', 'Ruim', 'Péssimo']
 const coresSono = ['#00A36C', '#2986cc', '#ffd966', '#e67f38', '#e06666', '#bcbcbc']
 
 function validateAndFetchData() {

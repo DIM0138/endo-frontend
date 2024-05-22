@@ -12,8 +12,7 @@ const submitForm = async () => {
         id: idRegistro,
         qualidadeSono: sono.value,
     }).then(() => {
-        console.log('Sono registrado com sucesso!')
-        window.location.href = `/dashboard/paciente/plano-alimentar/${idPaciente}`
+        window.location.reload();
     })   
   } catch (error) {
     console.error(error)

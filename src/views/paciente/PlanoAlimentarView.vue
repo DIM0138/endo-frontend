@@ -18,6 +18,7 @@ onBeforeMount(async () => {
         const response = await api.get(`/pacientes/${idPaciente.value}/plano-alimentar`);
         planoAlimentar.value = response.data;
         loading.value = false;
+        console.log(planoAlimentar.value)
     } catch (error) {
         console.error(error);
         loading.value = false;

@@ -10,28 +10,30 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
         <div class="card mb-3">
             <div class="card-header">
                 <span><i class="bi bi-clock"></i> {{ refeicao.horario }}</span>
-                <span v-if="refeicao.refeicaoFeita == true" class="refeicao-feita"><i class="bi bi-check-circle"></i> Refeição feita</span>
-                <span v-if="refeicao.refeicaoFeita == false" class="refeicao-feita"><i class="bi bi-x-circle"></i> Refeição não feita</span>
+                <span v-if="refeicao.refeicaoFeita == true" class="refeicao-feita"><i class="bi bi-check-circle"></i>
+                    Refeição feita</span>
+                <span v-if="refeicao.refeicaoFeita == false" class="refeicao-feita"><i class="bi bi-x-circle"></i>
+                    Refeição não feita</span>
             </div>
             <img :src="refeicao.receitaEscolhida.imagemURL" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">
-                    <span class="me-3">{{refeicao.receitaEscolhida.nome}}</span>
-                    <span class="badge text-bg-secondary me-2">{{refeicao.receitaEscolhida.tipoRefeicao}}</span>
-                    <span class="badge text-bg-secondary me-2"><i class="bi bi-lightning-fill"></i>{{refeicao.receitaEscolhida.calorias}} cals</span>
-                    <span class="badge text-bg-secondary"><i class="bi bi-hourglass-split"></i>{{refeicao.receitaEscolhida.tempoPreparo}} mins</span>
+                    <span class="me-3">{{ refeicao.receitaEscolhida.nome }}</span>
+                    <span class="badge text-bg-secondary me-2">{{ refeicao.receitaEscolhida.tipoRefeicao }}</span>
+                    <span class="badge text-bg-secondary me-2"><i class="bi bi-lightning-fill"></i>{{
+                    refeicao.receitaEscolhida.calorias }} cals</span>
+                    <span class="badge text-bg-secondary"><i class="bi bi-hourglass-split"></i>{{
+                    refeicao.receitaEscolhida.tempoPreparo }} mins</span>
                 </h5>
-                <p class="card-text">{{refeicao.receitaEscolhida.descricao}}</p>
-                <button 
-                    class="btn btn-refeicao me-2" :disabled="refeicao.refeicaoFeita != null"
-                    data-bs-toggle="modal" :data-bs-target="'#registroModal'+refeicao.id"
-                ><i class="bi bi-check"></i> Registrar</button>
+                <p class="card-text">{{ refeicao.receitaEscolhida.descricao }}</p>
+                <button class="btn btn-refeicao me-2" :disabled="refeicao.refeicaoFeita != null" data-bs-toggle="modal"
+                    :data-bs-target="'#registroModal' + refeicao.id"><i class="bi bi-check"></i> Registrar</button>
                 <RegistrarRefeicaoModal :refeicaoId="refeicao.id" :idPaciente="idPaciente" />
-                <button 
-                    class="btn btn-refeicao me-2"
-                    data-bs-toggle="modal" :data-bs-target="'#receitaModal'+refeicao.receitaEscolhida.id"
-                ><i class="bi bi-card-text"></i> Receita</button>
-                <ReceitaModal :receita="refeicao.receitaEscolhida" />
+                <button class="btn btn-refeicao me-2" data-bs-toggle="modal"
+                    :data-bs-target="'#receitaModal' + refeicao.receitaEscolhida.id + refeicao.id"><i
+                        class="bi bi-card-text"></i>
+                    Receita</button>
+                <ReceitaModal :refeicao="refeicao" />
             </div>
         </div>
     </div>
@@ -44,18 +46,22 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
     height: 15vw;
     object-fit: cover;
 }
+
 .card {
     width: 100%;
     margin: 0 auto;
     float: none;
 }
+
 .btn-refeicao {
     background-color: #8A0B01;
     color: white;
 }
+
 .btn-refeicao:hover {
     background-color: #f8694d;
 }
+
 .refeicao-feita {
     float: right;
     color: #8A0B01;

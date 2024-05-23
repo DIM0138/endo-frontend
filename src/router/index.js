@@ -12,6 +12,7 @@ import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 import MetricasView from '@/views/MetricasView.vue'
 import PerfilViewPaciente from '@/views/paciente/PerfilViewPaciente.vue'
 import PaginaInicialPacienteView from '@/views/paciente/PaginaInicialPacienteView.vue'
+import PaginaInicialNutricionistaView from '@/views/nutricionista/PaginaInicialNutricionistaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +40,13 @@ const router = createRouter({
       path: '/nutricionista/:id',
       name: 'nutricionista-dashboard',
       component: DashboardViewNutricionista,
+      redirect: { name: 'pagina-inicial-nutricionista' },
       children: [
+        {
+          path: 'pagina-inicial',
+          name: 'pagina-inicial-nutricionista',
+          component: PaginaInicialNutricionistaView
+        },
         {
           path: 'metricas-paciente/:idPaciente',
           name: 'metricas-paciente',
@@ -71,6 +78,7 @@ const router = createRouter({
       path: '/paciente/:idPaciente',
       name: 'paciente-dashboard',
       component: DashboardViewPaciente,
+      redirect: { name: 'pagina-inicial-paciente' },
       children: [
         {
           path: 'pagina-inicial',

@@ -21,10 +21,11 @@ import { RouterLink } from 'vue-router'
 							class="bi bi-journal-richtext d-md-none"></i></RouterLink>
 					<RouterLink class="nav-link" active-class="nav-link-active" to="/cadastro">Cadastre-se <i
 							class="bi bi-person-fill-add d-md-none"></i></RouterLink>
-					<RouterLink class="nav-link" active-class="nav-link-active" to="/nutricionista/1">Dashboard
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/nutricionista/1/pagina-inicial">
+						Dashboard
 						Nutricionista<i class="bi bi-ui-radios d-md-none"></i></RouterLink>
-					<RouterLink class="nav-link" active-class="nav-link-active" to="/paciente/1/pagina-inicial">Dashboard Paciente<i
-							class="bi bi-ui-radios d-md-none"></i></RouterLink>
+					<RouterLink class="nav-link" active-class="nav-link-active" to="/paciente/1/pagina-inicial">
+						Dashboard Paciente<i class="bi bi-ui-radios d-md-none"></i></RouterLink>
 				</div>
 			</div>
 		</div>

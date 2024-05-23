@@ -47,10 +47,17 @@ const unitsDictionary = {
               {{ passo }}
             </li>
           </ol>
+          <div v-if="receita.contemAlergicos">
+            <h5><i class="bi bi-exclamation-triangle"></i> Lista de Alérgicos</h5>
+            <ul>
+              <li v-for="(alergico, index) in receita.alergicos" :key="index">
+                {{ alergico }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Exportar</button>
         </div>
       </div>
     </div>

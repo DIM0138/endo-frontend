@@ -8,6 +8,7 @@ import RegistrarSintomaModal from '@/components/RegistrarSintomaModal.vue';
 
 const idPaciente = ref(useRoute().params.idPaciente)
 const loading = ref(true)
+const found = ref(false)
 const registroDiario = ref(null)
 
 const today = new Date()
@@ -24,10 +25,12 @@ async function fetchData() {
     .then((response) => {
       registroDiario.value = response.data
       loading.value = false
+      found.value = true
     })
     .catch((error) => {
       console.log(error)
       loading.value = false
+      found.value = false
     })
 }
 
@@ -40,28 +43,37 @@ onBeforeMount(() => {
   <div>
     <h4 class="mb-3"><i class="bi bi-calendar4-event"></i> Refeições de hoje </h4>
     <div v-if="loading">
-      <div class="text-center">
-        <img src="../../assets/nutricionista.png" class="img-nutricionista" />
-        <h5>Nenhuma refeição registrada para hoje. Fale com seu nutricionista para mais informações.</h5>
+      <div class="loading">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
       </div>
     </div>
-    <div v-else class="">
-      <div class="row m-3">
-        <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
-          :data-bs-target="'#registrarSonoModal' + registroDiario.id">
-          <i class="bi bi-moon-fill"></i> Registrar sono
-        </button>
-        <RegistrarSonoModal :idRegistro="registroDiario.id" :idPaciente="idPaciente"
-          :sonoRegistro="registroDiario.qualidadeSono" />
-        <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
-          :data-bs-target="'#registrarSintomaModal' + registroDiario.id">
-          <i class="bi bi-heart-pulse-fill"></i> Registrar sintoma
-        </button>
-        <RegistrarSintomaModal :idRegistro="registroDiario.id" :idPaciente="idPaciente"
-          :sintomas="registroDiario.sintomas" />
+    <div v-else>
+      <div v-if="!found">
+        <div class="text-center">
+          <img src="../../assets/nutricionista.png" class="img-nutricionista" />
+          <h5>Nenhuma refeição registrada para hoje. Fale com seu nutricionista para mais informações.</h5>
+        </div>
       </div>
-      <div v-for="(refeicao, index) in registroDiario.refeicoes">
-        <RefeicaoCard :refeicao="refeicao" :key="index" />
+      <div v-else>
+        <div class="row m-3">
+          <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
+            :data-bs-target="'#registrarSonoModal' + registroDiario.id">
+            <i class="bi bi-moon-fill"></i> Registrar sono
+          </button>
+          <RegistrarSonoModal :idRegistro="registroDiario.value.id" :idPaciente="idPaciente"
+            :sonoRegistro="registroDiario.qualidadeSono" />
+          <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
+            :data-bs-target="'#registrarSintomaModal' + registroDiario.id">
+            <i class="bi bi-heart-pulse-fill"></i> Registrar sintoma
+          </button>
+          <RegistrarSintomaModal :idRegistro="registroDiario.id" :idPaciente="idPaciente"
+            :sintomas="registroDiario.sintomas" />
+        </div>
+        <div v-for="(refeicao, index) in registroDiario.refeicoes" :key="index">
+          <RefeicaoCard :refeicao="refeicao" :key="index" />
+        </div>
       </div>
     </div>
   </div>

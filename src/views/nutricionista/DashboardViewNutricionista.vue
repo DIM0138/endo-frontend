@@ -51,8 +51,8 @@ onBeforeMount(async () => {
             <div class="row my-4">
                 <div class="col-3 d-none d-md-block align-items-center">
 
-                    <router-link class="dashboard-menu-link"
-                        :to="{ name: 'nutricionista-dashboard', params: { id: nutricionistaId } }">
+                    <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
+                        :to="{ name: 'pagina-inicial-nutricionista', params: { id: nutricionistaId } }">
                         <i class="bi bi-house-fill me-1"></i>
                         Página inicial</router-link>
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"

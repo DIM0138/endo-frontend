@@ -4,9 +4,11 @@
     <div>
       <span>
         Ao combinar conveniência, personalização e suporte contínuo, essa plataforma se destaca como uma
-        ferramentaindispensável para quem busca alcançar seus objetivos de saúde de forma eficaz e saudável.
+        ferramenta indispensável para quem busca alcançar seus objetivos de saúde de forma eficaz e saudável.
       </span>
-
+      <div>
+        <img src="../assets/about-us.svg">
+      </div>
     </div>
   </div>
 </template>

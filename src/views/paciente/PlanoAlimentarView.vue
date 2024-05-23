@@ -95,8 +95,8 @@ const unitsDictionary = {
             <div class="accordion" id="accordionRegistrosDiarios">
                 <div v-for="(registro, index) in planoAlimentar.registrosDiarios" class="accordion-item" :key="index">
                     <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            :data-bs-target="'#' + registro.data" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            :data-bs-target="'#' + registro.data" aria-expanded="true" aria-controls="collapse">
                             {{ registro.data }}
                         </button>
                     </h2>
@@ -113,7 +113,7 @@ const unitsDictionary = {
                             :sintomas="registro.sintomas" />
                     </div>
 
-                    <div :id="registro.data" class="accordion-collapse collapse show"
+                    <div :id="registro.data" class="accordion-collapse collapse"
                         data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
                             <div v-for="(refeicao, index) in registro.refeicoes" :key="index">

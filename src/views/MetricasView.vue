@@ -1,6 +1,7 @@
 <script setup>
 import AdesaoMetricaCard from '@/components/AdesaoMetricaCard.vue'
 import QuantidadeMetricaCard from '@/components/QuantidadeMetricaCard.vue'
+import RelatoriosTabelas from '@/components/RelatoriosTabelas.vue'
 
 import api from '@/services/api'
 import { onBeforeMount, ref } from 'vue'
@@ -8,6 +9,8 @@ import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const idPaciente = ref(useRoute().params.idPaciente)
+const paciente = ref({})
+const foundRelatorios = ref(false)
 
 const dados = ref([])
 const dataInicio = ref(null)
@@ -60,6 +63,12 @@ async function fetchData(dataInicio, dataFim) {
       componentKey.value++
       loading.value = false
     })
+
+    await api.get(`/pacientes/${idPaciente.value}`).then((response) => {
+      paciente.value = response.data
+      foundRelatorios.value = true;
+    })
+
   } catch (error) {
     console.error(error)
     loading.value = false
@@ -116,7 +125,7 @@ onBeforeMount(() => {
         </div>
       </div>
     </div>
-    <div v-else-if="dados.length > 0">
+    <div v-else-if="dados">
       <div class="row">
         <div class="col">
           <h5>Adesão às refeições</h5>
@@ -148,6 +157,12 @@ onBeforeMount(() => {
               :labelsRead="labelsReadEmocao" titleText="Emoções" :cores="coresEmocao" />
           </div>
         </div>
+      </div>
+
+      <h3 class="my-3">Relatórios de Medições</h3>
+      <div v-if="foundRelatorios">
+
+        <RelatoriosTabelas :paciente="paciente" />
       </div>
     </div>
   </div>

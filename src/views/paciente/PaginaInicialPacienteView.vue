@@ -62,7 +62,7 @@ onBeforeMount(() => {
             :data-bs-target="'#registrarSonoModal' + registroDiario.id">
             <i class="bi bi-moon-fill"></i> Registrar sono
           </button>
-          <RegistrarSonoModal :idRegistro="registroDiario.value.id" :idPaciente="idPaciente"
+          <RegistrarSonoModal :idRegistro="registroDiario.id" :idPaciente="idPaciente"
             :sonoRegistro="registroDiario.qualidadeSono" />
           <button class="btn btn-sono col mx-3" data-bs-toggle="modal"
             :data-bs-target="'#registrarSintomaModal' + registroDiario.id">

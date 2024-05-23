@@ -27,6 +27,7 @@ const verifyToken = (async () => {
 
             formDataPaciente.id = tokenObjeto.value.idPaciente;
             formDataPaciente.nomeCompleto = tokenObjeto.value.nomePaciente;
+            formDataPaciente.token = tokenInput.value;
             nutricionistaResponsavel.value = tokenObjeto.value.nomeNutricionista;
 
             tokenExiste.value = true;
@@ -115,6 +116,7 @@ const formDataPaciente = reactive({
     cpf: '',
     login: '',
     senha: '',
+    token: '',
 })
 </script>
 

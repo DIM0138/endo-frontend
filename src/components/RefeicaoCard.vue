@@ -33,7 +33,7 @@ const { refeicao, idPaciente } = defineProps(['refeicao', 'idPaciente']);
                     :data-bs-target="'#receitaModal' + refeicao.receitaEscolhida.id + refeicao.id"><i
                         class="bi bi-card-text"></i>
                     Receita</button>
-                <ReceitaModal :refeicao="refeicao" />
+                <ReceitaModal :receita="refeicao.receitaEscolhida" :identifier="refeicao.id" />
             </div>
         </div>
     </div>

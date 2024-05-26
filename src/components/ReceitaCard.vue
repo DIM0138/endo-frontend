@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import ReceitaModal from './ReceitaModal.vue';
 import EditarReceitaModal from './EditarReceitaModal.vue';
 
-const { receita, enableOptions } = defineProps(['receita', 'enableOptions']);
+const { receita, enableOptions, identifier } = defineProps(['receita', 'enableOptions', 'identifier']);
 
 const tipoRefeicao = ref("")
 
@@ -40,14 +40,14 @@ if (receita.tipoRefeicao == "CAFE") {
                 </div>
                 <div v-if="enableOptions" class="row mt-1 d-flex justify-content-center gap-2">
                     <button class="col btn-receita" data-bs-toggle="modal"
-                        :data-bs-target="'#receitaModal' + receita.id" title="Visualizar Receita"><i
+                        :data-bs-target="'#receitaModal' + receita.id + identifier" title="Visualizar Receita"><i
                             class="bi bi-card-text"></i></button>
                     <button class="col btn-receita" data-bs-toggle="modal"
                         :data-bs-target="'#editarReceitaModal' + receita.id" title="Editar Receita"><i
                             class="bi bi-pencil-square"></i></button>
                 </div>
 
-                <ReceitaModal :receita="receita" />
+                <ReceitaModal :receita="receita" :identifier="identifier" />
                 <EditarReceitaModal :receitaOriginal="receita" />
             </div>
         </div>

@@ -1,9 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-
-const { refeicao } = defineProps(['refeicao']);
-
-const receita = ref(refeicao.receitaEscolhida)
+const { receita, identifier } = defineProps(['receita', 'identifier']);
 
 const unitsDictionary = {
   QUILOS: 'Kg',
@@ -20,7 +16,7 @@ const unitsDictionary = {
 </script>
 
 <template>
-  <div class="modal fade" :id="'receitaModal' + receita.id + refeicao.id" tabindex="-1"
+  <div class="modal fade" :id="'receitaModal' + receita.id + identifier" tabindex="-1"
     aria-labelledby="receitaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">

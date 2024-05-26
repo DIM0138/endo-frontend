@@ -18,7 +18,6 @@ onBeforeMount(async () => {
         const response = await api.get(`/pacientes/${idPaciente.value}/plano-alimentar`);
         planoAlimentar.value = response.data;
         loading.value = false;
-        console.log(planoAlimentar.value)
     } catch (error) {
         console.error(error);
         loading.value = false;
@@ -118,7 +117,7 @@ const unitsDictionary = {
                         data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
                             <div v-for="(refeicao, index) in registro.refeicoes" :key="index">
-                                <RefeicaoCard :refeicao="refeicao" :idPaciente="idPaciente" />
+                                <RefeicaoCard :refeicao="refeicao" :identifier="index" :idPaciente="idPaciente" />
                             </div>
                         </div>
                     </div>

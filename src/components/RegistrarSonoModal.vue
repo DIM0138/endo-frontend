@@ -2,18 +2,18 @@
 import api from '@/services/api';
 import { ref } from 'vue'
 
-const { idRegistro, idPaciente, sonoRegistro } = defineProps(['idRegistro', 'idPaciente', 'sonoRegistro']);
+const { idRegistro, sonoRegistro } = defineProps(['idRegistro', 'idPaciente', 'sonoRegistro']);
 
 const sono = ref('PENDENTE')
 
 const submitForm = async () => {
   try {
-    await api.post('/planos-alimentares/registros-diarios/responder', {
-        id: idRegistro,
-        qualidadeSono: sono.value,
+    await api.post('/planos/registros-diarios/responder', {
+      id: idRegistro,
+      qualidadeSono: sono.value,
     }).then(() => {
-        window.location.reload();
-    })   
+      window.location.reload();
+    })
   } catch (error) {
     console.error(error)
   }
@@ -22,30 +22,20 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <div
-    class="modal fade"
-    :id="'registrarSonoModal'+idRegistro"
-    tabindex="-1"
-    aria-labelledby="registrarSonoModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" :id="'registrarSonoModal' + idRegistro" tabindex="-1"
+    aria-labelledby="registrarSonoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5 registrarSonoModalLabel">Registrar sono</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form @submit.prevent="submitForm">
           <div class="modal-body py-4">
             <div v-if="sonoRegistro != 'PENDENTE'">
-                <p>Registro de hoje: {{ sonoRegistro }}</p>
+              <p>Registro de hoje: {{ sonoRegistro }}</p>
 
-                Deseja alterar o registro?
+              Deseja alterar o registro?
             </div>
 
             <label>Como você avalia seu sono hoje?</label>

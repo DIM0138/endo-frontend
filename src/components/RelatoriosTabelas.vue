@@ -9,7 +9,7 @@ const relatorios = ref([]);
 const relatoriosProcessados = ref([]);
 
 const getRelatorios = (async () => {
-    await api.get('/relatorios/paciente/' + paciente.id)
+    await api.get('/enutri/relatorios/paciente/' + paciente.id)
         .then((response) => {
             relatorios.value = response.data;
             relatoriosProcessados.value = processData(relatorios.value);
@@ -33,7 +33,7 @@ const processData = (data) => {
                 }
             }
             reorganizedData[key].medicoes.push({
-                dataConsulta: relatorio.dataConsulta,
+                data_consulta: relatorio.data_consulta,
                 valor: medicao.valor
             })
         }
@@ -47,7 +47,7 @@ const processData = (data) => {
 
 
     organizedData.forEach(medicao => {
-        medicao.medicoes.sort((a, b) => new Date(a.dataConsulta) - new Date(b.dataConsulta));
+        medicao.medicoes.sort((a, b) => new Date(a.data_consulta) - new Date(b.data_consulta));
     });
 
     return organizedData;
@@ -66,15 +66,15 @@ onBeforeMount(() => {
             <table class="table table-responsive">
                 <thead>
                     <tr>
-                        <th v-for="medicao in relatorio.medicoes" :key="medicao.dataConsulta">{{ new
-            Date(medicao.dataConsulta).toLocaleDateString('pt-BR') }}
+                        <th v-for="medicao in relatorio.medicoes" :key="medicao.data_consulta">{{ new
+            Date(medicao.data_consulta).toLocaleDateString('pt-BR') }}
                         </th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
-                        <td v-for="medicao in relatorio.medicoes" :key="medicao.dataConsulta">{{ medicao.valor }}</td>
+                        <td v-for="medicao in relatorio.medicoes" :key="medicao.data_consulta">{{ medicao.valor }}</td>
                     </tr>
                 </tbody>
             </table>

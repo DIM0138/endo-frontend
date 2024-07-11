@@ -5,35 +5,15 @@ import api from '@/services/api';
 const validationText = ref([]);
 const senhaConfirmacao = ref('');
 
-const validateFormNutricionista = (loginAlreadyExists, emailAlreadyExists, cpfAlreadyExists, crnAlreadyExists) => {
+const validateFormNutricionista = () => {
     let validated = true;
 
-    formDataNutricionista.nomeCompleto = formDataNutricionista.nomeCompleto.trim();
+    formDataNutricionista.nome_completo = formDataNutricionista.nome_completo.trim();
     formDataNutricionista.email = formDataNutricionista.email.trim();
     formDataNutricionista.login = formDataNutricionista.login.trim();
     formDataNutricionista.formacao = formDataNutricionista.formacao.trim();
     formDataNutricionista.especialidade = formDataNutricionista.especialidade.trim();
-    formDataNutricionista.enderecoProfissional = formDataNutricionista.enderecoProfissional.trim();
-
-    if (loginAlreadyExists) {
-        validationText.value.push('Login ja existente. Escolha outro.');
-        validated = false;
-    }
-
-    if (emailAlreadyExists) {
-        validationText.value.push('Email já cadastrado. Escolha outro.');
-        validated = false;
-    }
-
-    if (cpfAlreadyExists) {
-        validationText.value.push('CPF já cadastrado. Escolha outro.');
-        validated = false;
-    }
-
-    if (crnAlreadyExists) {
-        validationText.value.push('CRN já cadastrado. Escolha outro.');
-        validated = false;
-    }
+    formDataNutricionista.endereco_profissional = formDataNutricionista.endereco_profissional.trim();
 
     if (formDataNutricionista.senha !== senhaConfirmacao.value) {
         validationText.value.push('As senhas devem ser iguais.');
@@ -41,7 +21,7 @@ const validateFormNutricionista = (loginAlreadyExists, emailAlreadyExists, cpfAl
     }
 
     const today = new Date();
-    const birthDate = new Date(formDataNutricionista.dataNascimento);
+    const birthDate = new Date(formDataNutricionista.data_nascimento);
     let age = today.getFullYear() - birthDate.getFullYear();
     const month = today.getMonth() - birthDate.getMonth();
 
@@ -61,36 +41,26 @@ const validateFormNutricionista = (loginAlreadyExists, emailAlreadyExists, cpfAl
 const submitFormNutricionista = (async () => {
     validationText.value = [];
 
-    const checkForLogin = await api.get('/nutricionistas/existe/login', { params: { login: formDataNutricionista.login } });
-    const loginAlreadyExists = checkForLogin.data;
-
-    const checkForEmail = await api.get('/nutricionistas/existe/email', { params: { email: formDataNutricionista.email } });
-    const emailAlreadyExists = checkForEmail.data;
-
-    const checkForCpf = await api.get('/nutricionistas/existe/cpf', { params: { cpf: formDataNutricionista.cpf } });
-    const cpfAlreadyExists = checkForCpf.data;
-
-    const checkForCrn = await api.get('/nutricionistas/existe/crn', { params: { crn: formDataNutricionista.crn } });
-    const crnAlreadyExists = checkForCrn.data;
-
-    const validated = validateFormNutricionista(loginAlreadyExists, emailAlreadyExists, cpfAlreadyExists, crnAlreadyExists);
+    const validated = validateFormNutricionista();
     if (validated) {
-        await api.post('/nutricionistas/novo', formDataNutricionista)
+        await api.post('/enutri/nutricionistas', formDataNutricionista)
             .then((response) => {
-                const newNutricionista = response.data;
-                window.location.href = `/nutricionista/${newNutricionista.id}`;
+                if (response.status === 200) {
+                    const newNutricionista = response.data;
+                    window.location.href = `/nutricionista/${newNutricionista.id}`;
+                }
             })
             .catch((error) => {
                 console.log(error)
-                validationText.value.push("Houve um erro interno. Tente novamente.");
+                validationText.value = error.response.data.errors;
             })
     }
 })
 
 const formDataNutricionista = reactive({
-    nomeCompleto: "",
+    nome_completo: "",
     genero: "",
-    dataNascimento: "",
+    data_nascimento: "",
     endereco: "",
     telefone: "",
     email: "",
@@ -100,7 +70,7 @@ const formDataNutricionista = reactive({
     crn: "",
     formacao: "",
     especialidade: "",
-    enderecoProfissional: "",
+    endereco_profissional: "",
 })
 </script>
 
@@ -114,7 +84,7 @@ const formDataNutricionista = reactive({
             <div class="col-lg-5">
                 <label for="inputNomeCompleto" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" id="inputNomeCompleto"
-                    v-model="formDataNutricionista.nomeCompleto" required>
+                    v-model="formDataNutricionista.nome_completo" required>
             </div>
             <div class="col-lg-4">
                 <label for="inputEmail" class="form-label">Email</label>
@@ -123,7 +93,7 @@ const formDataNutricionista = reactive({
             <div class="col-lg-3">
                 <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
                 <input type="date" class="form-control" id="inputDataNascimento"
-                    v-model="formDataNutricionista.dataNascimento" required>
+                    v-model="formDataNutricionista.data_nascimento" required>
             </div>
             <div class="col-lg-3">
                 <label for="inputLogin" class="form-label">Login</label>
@@ -166,14 +136,14 @@ const formDataNutricionista = reactive({
             <div class="col-md-6">
                 <label for="inputEnderecoProfissional" class="form-label">Endereço Profissional</label>
                 <input type="text" class="form-control" id="inputEnderecoProfissional"
-                    v-model="formDataNutricionista.enderecoProfissional" required>
+                    v-model="formDataNutricionista.endereco_profissional" required>
             </div>
             <div class="col-md-6">
                 <label for="inputGenero" class="form-label">Gênero</label>
                 <select class="form-select" v-model="formDataNutricionista.genero" id="inputGenero" required>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Outro">Outro</option>
+                    <option value="FEMININO">Feminino</option>
+                    <option value="MASCULINO">Masculino</option>
+                    <option value="OUTRO">Outro</option>
                 </select>
             </div>
             <div class="row my-3 justify-content-end align-items-center">

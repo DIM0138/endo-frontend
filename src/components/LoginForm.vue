@@ -9,7 +9,7 @@ const validationText = ref([]);
 
 const loginPaciente = (async () => {
 
-    await api.get("/pacientes/login/", { params: { login: username.value, senha: password.value } })
+    await api.get("/login", { params: { login: username.value, senha: password.value } })
         .then((response) => {
             const paciente = response.data;
             if (paciente.senha === password.value) {
@@ -31,7 +31,7 @@ const loginPaciente = (async () => {
 })
 
 const loginNutricionista = (async () => {
-    await api.get("/nutricionistas/login/", { params: { login: username.value, senha: password.value } })
+    await api.get("/login", { params: { login: username.value, senha: password.value } })
         .then((response) => {
             const nutricionista = response.data;
             if (nutricionista.senha === password.value) {
@@ -58,7 +58,7 @@ const submitLogin = (async () => {
     username.value = username.value.trim();
 
     if (userType.value == 'paciente') {
-        await api.get('/pacientes/existe/login', { params: { login: username.value } })
+        await api.get('/enutri/pacientes/existe/login', { params: { login: username.value } })
             .then((response) => {
                 const loginExists = response.data;
                 if (loginExists) {
@@ -75,7 +75,7 @@ const submitLogin = (async () => {
     }
 
     else if (userType.value === 'nutricionista') {
-        await api.get("/nutricionistas/existe/login", { params: { login: username.value } })
+        await api.get("/enutri/nutricionistas/existe/login", { params: { login: username.value } })
             .then((response) => {
                 const loginExists = response.data;
                 if (loginExists) {

@@ -10,7 +10,7 @@ defineEmits(['deletePlanoAlimentar', 'activatePlanoAlimentar']);
 </script>
 
 <template>
-    <td>{{ planoAlimentar.paciente.nomeCompleto }}</td>
+    <td>{{ planoAlimentar.paciente.nome_completo }}</td>
     <td>{{ new Date(planoAlimentar.dataInicio + " ").toLocaleDateString("pt-BR") }}</td>
     <td>{{ new Date(planoAlimentar.dataFim + " ").toLocaleDateString("pt-BR") }}</td>
     <td>{{ planoAlimentar.ativo ? 'Ativo' : 'Inativo' }}</td>

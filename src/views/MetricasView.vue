@@ -64,7 +64,7 @@ async function fetchData(dataInicio, dataFim) {
       loading.value = false
     })
 
-    await api.get(`/pacientes/${idPaciente.value}`).then((response) => {
+    await api.get(`/enutri/pacientes/${idPaciente.value}`).then((response) => {
       paciente.value = response.data
       foundRelatorios.value = true;
     })

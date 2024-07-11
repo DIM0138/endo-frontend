@@ -10,7 +10,7 @@ const loading = ref(true);
 
 onBeforeMount(async () => {
 
-  await api.get("/pacientes/" + pacienteId.value)
+  await api.get("/enutri/pacientes/" + pacienteId.value)
     .then((response) => {
       paciente.value = response.data;
       found.value = true;

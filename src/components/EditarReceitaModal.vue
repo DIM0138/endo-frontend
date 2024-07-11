@@ -7,7 +7,7 @@ const receita = reactive(receitaOriginal)
 
 const submitForm = (async () => {
     console.log(receita)
-    await api.patch('/receitas/atualizar/' + receitaOriginal.id)
+    await api.patch('/enutri/receitas/' + receitaOriginal.id)
         .then(() => {
             window.location.reload()
         })

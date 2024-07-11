@@ -11,7 +11,7 @@ const { paciente } = defineProps(['paciente'])
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 visualizarMedicoesModalLabel">Medições de {{ paciente.nomeCompleto }}
+                    <h1 class="modal-title fs-5 visualizarMedicoesModalLabel">Medições de {{ paciente.nome_completo }}
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

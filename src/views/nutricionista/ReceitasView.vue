@@ -8,9 +8,14 @@ import { onBeforeMount, ref, watch } from 'vue';
 let receitas;
 
 onBeforeMount(async () => {
-    const response = await api.get('/receitas/todos');
-    receitas = response.data;
-    receitasFiltradas.value = receitas;
+    try {
+        const response = await api.get('/enutri/receitas/todos');
+        receitas = response.data;
+        receitasFiltradas.value = receitas;
+    }
+    catch (error) {
+        console.log(error);
+    }
 })
 
 // FILTRO DE RECEITAS

@@ -21,7 +21,7 @@ defineEmits(['confirmActivate']);
                         durante sua duração. Planos anteriores serão inativados.
                     </div>
                     <br>
-                    <div>Paciente: {{ planoAlimentar.paciente.nomeCompleto }}</div>
+                    <div>Paciente</div>
                     <div>Este plano vai de <strong>{{ new Date(planoAlimentar.dataInicio).toLocaleDateString("pt-BR")
                             }}</strong> até
                         <strong>{{ new Date(planoAlimentar.dataFim).toLocaleDateString("pt-BR") }}.</strong>

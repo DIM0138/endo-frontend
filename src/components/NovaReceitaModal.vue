@@ -1,15 +1,14 @@
 <script setup>
-import { reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { reactive } from 'vue';
 import api from '@/services/api';
-
-const idNutricionista = ref(useRoute().params.id);
 
 const submitForm = (async () => {
     if (receita.imagemURL == '') {
         receita.imagemURL = 'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg'
     }
-    await api.post('/receitas/novo', receita)
+
+    console.log(receita);
+    await api.post('/enutri/receitas', receita)
         .then(() => {
             console.log('Receita adicionada com sucesso!')
             window.location.reload()
@@ -20,7 +19,6 @@ const submitForm = (async () => {
 })
 
 const receita = reactive({
-    nutricionista: idNutricionista.value,
     tipoRefeicao: '',
     nome: '',
     descricao: '',
@@ -28,14 +26,7 @@ const receita = reactive({
     calorias: 0,
     imagemURL: '',
     modoPreparo: [""],
-    ingredientes: [
-        {
-            ingrediente: {
-                nome: '',
-                medida: '',
-            }
-        }
-    ],
+    ingredientes: [],
     contemAlergicos: false,
     alergicos: []
 })

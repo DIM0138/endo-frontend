@@ -12,13 +12,19 @@ const pesquisaNome = ref('');
 const pesquisaTipo = ref('TODOS');
 
 onBeforeMount(async () => {
-    const response = await api.get('/planos-alimentares/nutricionista/' + nutricionistaId.value);
-    listaPlanosAlimentares = response.data;
-    listaPlanosAlimentaresFiltrados.value = listaPlanosAlimentares;
+    await api.get('/planos/profissional/' + nutricionistaId.value)
+        .then((response) => {
+            console.log(response.data);
+            listaPlanosAlimentares = response.data;
+            listaPlanosAlimentaresFiltrados.value = listaPlanosAlimentares;
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 })
 
 const deletarPlanoAlimentar = async (planoAlimentarId) => {
-    await api.delete('/planos-alimentares/' + planoAlimentarId)
+    await api.delete('/planos/' + planoAlimentarId)
         .then(() => {
             window.location.reload();
         })
@@ -28,7 +34,7 @@ const deletarPlanoAlimentar = async (planoAlimentarId) => {
 }
 
 const ativarPlanoAlimentar = async (planoAlimentarId) => {
-    await api.post('/planos-alimentares/' + planoAlimentarId + '/ativar')
+    await api.get('/planos/' + planoAlimentarId + '/ativar')
         .then(() => {
             window.location.reload();
         })
@@ -39,7 +45,7 @@ const ativarPlanoAlimentar = async (planoAlimentarId) => {
 
 watch([pesquisaNome, pesquisaTipo], () => {
     listaPlanosAlimentaresFiltrados.value = listaPlanosAlimentares.filter(planoAlimentar => {
-        const pacienteMatch = planoAlimentar.paciente.nomeCompleto.toLowerCase().includes(pesquisaNome.value.toLowerCase());
+        const pacienteMatch = planoAlimentar.paciente.nome_completo.toLowerCase().includes(pesquisaNome.value.toLowerCase());
         const tipoMatch = pesquisaTipo.value === 'TODOS' || planoAlimentar.status === pesquisaTipo.value;
         return pacienteMatch && tipoMatch;
     })

@@ -1,13 +1,13 @@
 <script setup>
 import EscolherReceita from '@/components/EscolherReceita.vue';
 import api from '@/services/api';
-import { reactive} from 'vue';
+import { reactive } from 'vue';
 
 const { planoAlimentar } = defineProps(['planoAlimentar']);
 let planoAlimentarModal = reactive(planoAlimentar);
 
 const deleteRefeicao = (async (refeicao, registroDiario, index) => {
-    await api.delete('/planos-alimentares/' + planoAlimentarModal.id + '/refeicao/' + refeicao.id)
+    await api.delete('/planos/' + planoAlimentarModal.id + '/atividade-diaria/' + refeicao.id)
         .then(() => {
             registroDiario.refeicoes.splice(index, 1);
         })
@@ -15,20 +15,26 @@ const deleteRefeicao = (async (refeicao, registroDiario, index) => {
             console.log(error)
         })
 })
-
+''
 const novaRefeicao = (async (escolhas, registroDiario) => {
-    await api.post('/planos-alimentares/' + planoAlimentarModal.id + '/refeicao', {
+    const refeicao = {
         data: registroDiario.data,
-        receitaEscolhida: {
-        id: escolhas.receitaEscolhida},
+        tratamento: {
+            id: escolhas.receitaEscolhida
+        },
         horario: escolhas.horarioEscolhido
-    })
-    .then((response) => {
-        registroDiario.refeicoes.push(response.data);
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+    }
+
+    console.log(refeicao);
+    await api.post('/planos/' + planoAlimentarModal.id + '/atividade-diaria', refeicao)
+        .then((response) => {
+            if (response.status == 200) {
+                registroDiario.refeicoes.push(response.data);
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 })
 
 </script>
@@ -59,7 +65,7 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
                         <div class="col">
                             <label for="paciente">Paciente</label>
                             <input type="text" class="form-control" id="paciente"
-                                :value="planoAlimentarModal.paciente.nomeCompleto" disabled>
+                                :value="planoAlimentarModal.paciente.nome_completo" disabled>
                         </div>
                         <div class="col">
                             <label for="status">Status</label>
@@ -79,7 +85,7 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
                                     aria-expanded="false"
                                     :aria-controls="'registroDiarioCollapse' + planoAlimentarModal.id + registroDiario.id">
                                     {{ registroDiario.data }}
-                                    ({{ registroDiario.refeicoes.length }} refeições)
+                                    (0 refeições)
                                 </button>
                             </h2>
 
@@ -98,12 +104,12 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(refeicao, index) in registroDiario.refeicoes"
+                                            <tr v-for="(refeicao, index) in registroDiario.atividadesDiarias"
                                                 :key="'refeicao' + refeicao.id">
-                                                <td>{{ refeicao.receitaEscolhida.nome }}</td>
+                                                <td>{{ refeicao.tratamento.nome }}</td>
                                                 <td>{{ refeicao.horario }}</td>
-                                                <td>{{ refeicao.receitaEscolhida.calorias }}</td>
-                                                <td>{{ refeicao.receitaEscolhida.contemAlergicos ? 'Sim' : 'Não' }}</td>
+                                                <td>{{ refeicao.tratamento.calorias }}</td>
+                                                <td>{{ refeicao.tratamento.contemAlergicos ? 'Sim' : 'Não' }}</td>
                                                 <td><button class="btn btn-outline-danger"
                                                         @click="deleteRefeicao(refeicao, registroDiario, index)"><i
                                                             class="bi bi-trash"></i></button></td>

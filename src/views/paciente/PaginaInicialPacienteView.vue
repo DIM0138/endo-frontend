@@ -21,7 +21,7 @@ const formattedDate = `${year}-${month}-${day}`
 
 async function fetchData() {
   await api
-    .get(`/pacientes/${idPaciente.value}/registro-diario?data=${formattedDate}`)
+    .get(`/planos/paciente/${idPaciente.value}/registro-diario?data=${formattedDate}`)
     .then((response) => {
       registroDiario.value = response.data
       loading.value = false

@@ -9,13 +9,13 @@ const nutricionistaId = ref(useRoute().params.id);
 const loaded = ref(false);
 
 onBeforeMount(async () => {
-    await api.get('/nutricionistas/' + nutricionistaId.value)
+    await api.get('/enutri/nutricionistas/' + nutricionistaId.value)
         .then((response) => {
             nutricionista.value = response.data;
             formNutricionista.id = nutricionista.value.id;
-            formNutricionista.nomeCompleto = nutricionista.value.nomeCompleto;
+            formNutricionista.nome_completo = nutricionista.value.nome_completo;
             formNutricionista.genero = nutricionista.value.genero;
-            formNutricionista.dataNascimento = nutricionista.value.dataNascimento;
+            formNutricionista.data_nascimento = nutricionista.value.data_nascimento;
             formNutricionista.endereco = nutricionista.value.endereco;
             formNutricionista.telefone = nutricionista.value.telefone;
             formNutricionista.email = nutricionista.value.email;
@@ -24,7 +24,7 @@ onBeforeMount(async () => {
             formNutricionista.senha = nutricionista.value.senha;
             formNutricionista.formacao = nutricionista.value.formacao;
             formNutricionista.especialidade = nutricionista.value.especialidade;
-            formNutricionista.enderecoProfissional = nutricionista.value.enderecoProfissional;
+            formNutricionista.endereco_profissional = nutricionista.value.endereco_profissional;
             formNutricionista.crn = nutricionista.value.crn;
 
             loaded.value = true;
@@ -38,9 +38,9 @@ const senhaConfirmacao = ref('');
 
 const formNutricionista = reactive({
     id: "",
-    nomeCompleto: "",
+    nome_completo: "",
     genero: "",
-    dataNascimento: "",
+    data_nascimento: "",
     endereco: "",
     telefone: "",
     email: "",
@@ -49,12 +49,12 @@ const formNutricionista = reactive({
     senha: "",
     formacao: "",
     especialidade: "",
-    enderecoProfissional: "",
+    endereco_profissional: "",
     crn: "",
 })
 
 const updateNutricionista = (async () => {
-    await api.patch('/nutricionistas/atualizar/' + nutricionistaId.value, formNutricionista)
+    await api.patch('/enutri/nutricionistas/' + nutricionistaId.value, formNutricionista)
         .then(() => {
             window.location.reload();
         })
@@ -86,7 +86,7 @@ const validateForm = () => {
                 <div class="col">
                     <div>
                         <h3 class="text-end">
-                            {{ nutricionista.nomeCompleto }}
+                            {{ nutricionista.nome_completo }}
                         </h3>
                     </div>
                     <div>
@@ -106,22 +106,22 @@ const validateForm = () => {
                 <form @submit.prevent="validateForm()">
                     <div class="row">
                         <div class="mb-3 col">
-                            <label for="nomeCompleto" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nomeCompleto"
-                                v-model="formNutricionista.nomeCompleto" required>
+                            <label for="nome_completo" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome_completo"
+                                v-model="formNutricionista.nome_completo" required>
                         </div>
                         <div class="mb-3 col">
                             <label for="genero" class="form-label">Gênero</label>
                             <select class="form-select" id="genero" v-model="formNutricionista.genero" required>
-                                <option value="Feminino">Feminino</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Outro">Outro</option>
+                                <option value="FEMININO">Feminino</option>
+                                <option value="MASCULINO">Masculino</option>
+                                <option value="OUTRO">Outro</option>
                             </select>
                         </div>
                         <div class="mb-3 col">
-                            <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="dataNascimento"
-                                v-model="formNutricionista.dataNascimento" required>
+                            <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="data_nascimento"
+                                v-model="formNutricionista.data_nascimento" required>
                         </div>
                     </div>
                     <div class="row">
@@ -156,9 +156,9 @@ const validateForm = () => {
                                 v-model="formNutricionista.especialidade" required>
                         </div>
                         <div class="mb-3 col">
-                            <label for="enderecoProfissional" class="form-label">Endereço Profissional</label>
-                            <input type="text" class="form-control" id="enderecoProfissional"
-                                v-model="formNutricionista.enderecoProfissional" required>
+                            <label for="endereco_profissional" class="form-label">Endereço Profissional</label>
+                            <input type="text" class="form-control" id="endereco_profissional"
+                                v-model="formNutricionista.endereco_profissional" required>
                         </div>
                         <div class="mb-3 col">
                             <label for="crn" class="form-label">CRN</label>

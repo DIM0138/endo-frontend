@@ -10,13 +10,13 @@ const pacienteId = ref(useRoute().params.idPaciente);
 const loaded = ref(false);
 
 onBeforeMount(async () => {
-    await api.get('/pacientes/' + pacienteId.value)
+    await api.get('/enutri/pacientes/' + pacienteId.value)
         .then(async (response) => {
             paciente.value = response.data;
             formPaciente.id = paciente.value.id;
-            formPaciente.nomeCompleto = paciente.value.nomeCompleto;
+            formPaciente.nome_completo = paciente.value.nome_completo;
             formPaciente.genero = paciente.value.genero;
-            formPaciente.dataNascimento = paciente.value.dataNascimento;
+            formPaciente.data_nascimento = paciente.value.data_nascimento;
             formPaciente.endereco = paciente.value.endereco;
             formPaciente.telefone = paciente.value.telefone;
             formPaciente.email = paciente.value.email;
@@ -25,10 +25,10 @@ onBeforeMount(async () => {
             formPaciente.senha = paciente.value.senha;
             formPaciente.formacao = paciente.value.formacao;
             formPaciente.especialidade = paciente.value.especialidade;
-            formPaciente.enderecoProfissional = paciente.value.enderecoProfissional;
+            formPaciente.endereco_profissional = paciente.value.endereco_profissional;
             formPaciente.crn = paciente.value.crn;
 
-            await api.get('/nutricionistas/' + paciente.value.nutricionistaResponsavelId)
+            await api.get('/enutri/nutricionistas/' + paciente.value.nutricionistaResponsavelId)
                 .then((response) => {
                     nutricionista.value = response.data;
                     loaded.value = true;
@@ -48,9 +48,9 @@ const senhaConfirmacao = ref('');
 
 const formPaciente = reactive({
     id: "",
-    nomeCompleto: "",
+    nome_completo: "",
     genero: "",
-    dataNascimento: "",
+    data_nascimento: "",
     endereco: "",
     telefone: "",
     email: "",
@@ -60,7 +60,7 @@ const formPaciente = reactive({
 })
 
 const updatePaciente = (async () => {
-    await api.patch('/pacientes/atualizar/' + pacienteId.value, formPaciente)
+    await api.patch('/enutri/pacientes/' + pacienteId.value, formPaciente)
         .then(() => {
             window.location.reload();
         })
@@ -92,7 +92,7 @@ const validateForm = () => {
                 <div class="col">
                     <div>
                         <h3 class="text-end">
-                            {{ paciente.nomeCompleto }}
+                            {{ paciente.nome_completo }}
                         </h3>
                     </div>
                     <div>
@@ -112,9 +112,9 @@ const validateForm = () => {
                 <form @submit.prevent="validateForm()">
                     <div class="row">
                         <div class="mb-3 col">
-                            <label for="nomeCompleto" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nomeCompleto"
-                                v-model="formPaciente.nomeCompleto" required>
+                            <label for="nome_completo" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome_completo"
+                                v-model="formPaciente.nome_completo" required>
                         </div>
                         <div class="mb-3 col">
                             <label for="genero" class="form-label">Gênero</label>
@@ -125,9 +125,9 @@ const validateForm = () => {
                             </select>
                         </div>
                         <div class="mb-3 col">
-                            <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="dataNascimento"
-                                v-model="formPaciente.dataNascimento" required>
+                            <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="data_nascimento"
+                                v-model="formPaciente.data_nascimento" required>
                         </div>
                     </div>
                     <div class="row">
@@ -153,7 +153,7 @@ const validateForm = () => {
                         <div class="mb-3 col">
                             <label for="nutricionista" class="form-label">Nutricionista</label>
                             <input type="text" class="form-control" id="nutricionista"
-                                :value="nutricionista.nomeCompleto" disabled>
+                                :value="nutricionista.nome_completo" disabled>
                         </div>
                         <div class="mb-3 col">
                             <label for="especialidade" class="form-label">Especialidade</label>

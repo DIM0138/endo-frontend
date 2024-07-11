@@ -14,23 +14,30 @@ const idPaciente = ref(null);
 onBeforeMount(async () => {
     idPaciente.value = useRoute().params.idPaciente;
 
-    try {
-        const response = await api.get(`/pacientes/${idPaciente.value}/plano-alimentar`);
-        planoAlimentar.value = response.data;
-        loading.value = false;
-    } catch (error) {
-        console.error(error);
-        loading.value = false;
-    }
+    await api.get(`/planos/paciente/${idPaciente.value}`)
+        .then((response) => {
+            if (response.status == 200) {
+                planoAlimentar.value = response.data;
+            }
+            loading.value = false;
+        })
+        .catch((error) => {
+            console.log(error)
+            loading.value = false;
+        })
 })
 
 const generateListaDeCompras = async (idPlanoAlimentar) => {
-    try {
-        const response = await api.get(`/planos-alimentares/${idPlanoAlimentar}/lista-compras`);
-        listaDeCompras.value = response.data;
-    } catch (error) {
-        console.error(error);
-    }
+    await api.get(`/planos/resumo/${idPlanoAlimentar}`)
+        .then((response) => {
+            if (response.status == 200) {
+                console.log(response.data)
+                listaDeCompras.value = response.data;
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 const unitsDictionary = {
@@ -56,7 +63,7 @@ const unitsDictionary = {
             </div>
         </div>
 
-        <div v-else>
+        <div v-else-if="planoAlimentar">
             <div class="row mb-4">
                 <h4 class="col">Plano alimentar atual</h4>
                 <button @click="generateListaDeCompras(planoAlimentar.id)" class="col btn btn-secondary"
@@ -116,13 +123,16 @@ const unitsDictionary = {
                     <div :id="registro.data" class="accordion-collapse collapse"
                         data-bs-parent="#accordionRegistrosDiarios">
                         <div class="accordion-body">
-                            <div v-for="(refeicao, index) in registro.refeicoes" :key="index">
+                            <div v-for="(refeicao, index) in registro.atividadesDiarias" :key="index">
                                 <RefeicaoCard :refeicao="refeicao" :identifier="index" :idPaciente="idPaciente" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div v-else>
+            <h4 class="text-center">Nenhum plano de alimentar encontrado.</h4>
         </div>
     </div>
 </template>

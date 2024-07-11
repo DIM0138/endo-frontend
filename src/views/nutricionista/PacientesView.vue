@@ -1,5 +1,6 @@
 <script setup>
 import { onBeforeMount, reactive, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import api from '@/services/api';
 import NovoPacienteModal from '@/components/NovoPacienteModal.vue';
 import NovoRelatorioModal from '@/components/NovoRelatorioModal.vue';
@@ -8,12 +9,26 @@ import MedicoesPacienteModal from '@/components/MedicoesPacienteModal.vue';
 
 // CARREGAR PACIENTES
 const pacientes = ref();
-const pacientesFiltrados = reactive({});
+const pacientesFiltrados = reactive([]);
+const nutricionistaId = ref(useRoute().params.id);
+const tokens = ref([]);
+
 onBeforeMount(async () => {
-    await api.get('/nutricionistas/1/pacientes')
+    await api.get('/enutri/pacientes/profissional/' + nutricionistaId.value)
         .then((response) => {
+            console.log(response.data);
             pacientes.value = response.data;
             pacientesFiltrados.value = pacientes.value;
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    await api.get("/tokens/profissional/" + nutricionistaId.value)
+        .then((response) => {
+            if (response.status == 200) {
+                tokens.value = response.data
+            }
         })
         .catch((error) => {
             console.log(error)
@@ -24,7 +39,7 @@ onBeforeMount(async () => {
 const pesquisaNome = ref('');
 watch(pesquisaNome, () => {
     pacientesFiltrados.value = pacientes.value.filter(paciente => {
-        return paciente.nomeCompleto.toLowerCase().includes(pesquisaNome.value.toLowerCase());
+        return paciente.nome_completo.toLowerCase().includes(pesquisaNome.value.toLowerCase());
     })
 })
 </script>
@@ -75,18 +90,16 @@ watch(pesquisaNome, () => {
                         <th scope="col">Email</th>
                         <th scope="col">Telefone</th>
                         <th scope="col">Gênero</th>
-                        <th scope="col">Token</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="paciente in pacientesFiltrados.value" :key="paciente.id">
                         <th scope="row">{{ paciente.id }}</th>
-                        <td>{{ paciente.nomeCompleto }}</td>
+                        <td>{{ paciente.nome_completo }}</td>
                         <td>{{ paciente.email }}</td>
                         <td>{{ paciente.telefone }}</td>
                         <td>{{ paciente.genero }}</td>
-                        <td><small>{{ paciente.token }}</small></td>
                         <td>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-warning" title="Editar Paciente" data-bs-toggle="modal"
@@ -106,6 +119,27 @@ watch(pesquisaNome, () => {
                         <NovoRelatorioModal :paciente="paciente" />
                         <EditarPacienteModal :paciente="paciente" />
                         <MedicoesPacienteModal :paciente="paciente" />
+                    </tr>
+                </tbody>
+            </table>
+            <div v-if="!pacientesFiltrados">
+                <h3 class="text-center">Nenhum Paciente encontrado</h3>
+            </div>
+            <hr>
+            <h3>Pacientes Pré-Cadastrados</h3>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Token</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="token in tokens" :key="token.token">
+                        <td>{{ token.nome_paciente }}</td>
+                        <td>{{ token.email }}</td>
+                        <td>{{ token.token }}</td>
                     </tr>
                 </tbody>
             </table>

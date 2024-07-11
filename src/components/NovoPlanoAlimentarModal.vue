@@ -7,10 +7,8 @@ const nutricionistaId = ref(useRoute().params.id);
 const statusText = ref([]);
 
 const planoAlimentar = reactive({
-    nutricionistaResponsavel: nutricionistaId.value,
-    paciente: {
-        id: null
-    },
+    profissionalResponsavel: nutricionistaId.value,
+    paciente: null,
     dataInicio: null,
     dataFim: null
 })
@@ -19,7 +17,7 @@ const listaPacientes = reactive({})
 
 onBeforeMount(async () => {
     statusText.value = [];
-    await api.get('/nutricionistas/' + nutricionistaId.value + '/pacientes')
+    await api.get('/enutri/pacientes/profissional/' + nutricionistaId.value)
         .then((response) => {
             listaPacientes.value = response.data;
         })
@@ -29,7 +27,7 @@ onBeforeMount(async () => {
         })
 })
 const submitForm = (async () => {
-    await api.post('/planos-alimentares/novo', planoAlimentar)
+    await api.post('/planos', planoAlimentar)
         .then(() => {
             window.location.reload()
         })
@@ -53,11 +51,10 @@ const submitForm = (async () => {
                 <form @submit.prevent="submitForm">
                     <div class="modal-body py-4">
                         <label for="pacienteEscolhido">Paciente</label>
-                        <select v-model="planoAlimentar.paciente.id" class="form-select" id="pacienteEscolhido"
-                            required>
+                        <select v-model="planoAlimentar.paciente" class="form-select" id="pacienteEscolhido" required>
                             <option class="form-select" v-for="paciente in listaPacientes.value" :value="paciente.id"
                                 :key="paciente.id">{{
-                    paciente.nomeCompleto }} ({{ paciente.email }})</option>
+                    paciente.nome_completo }} ({{ paciente.email }})</option>
                         </select>
 
                         <div class="row my-2">

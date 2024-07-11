@@ -18,11 +18,10 @@ defineEmits(['confirmDelete']);
                 <div class="modal-body py-4">
                     <div v-if="planoAlimentar.ativo">
                         <div class="font-weight-bold text-danger"><i class="bi bi-exclamation-triangle"></i> O Plano
-                            Alimentar selecionado está ativo. {{ planoAlimentar.paciente.nomeCompleto.split(' ')[0] }}
-                            não terá mais acesso a ele.</div>
+                            Alimentar selecionado está ativo. O Paciente não terá mais acesso a ele.</div>
                         <br>
                     </div>
-                    <div>Paciente: {{ planoAlimentar.paciente.nomeCompleto }}</div>
+                    <div>Paciente: {{ planoAlimentar.paciente.nome_completo }}</div>
                     <div>Este plano vai de <strong>{{ new Date(planoAlimentar.dataInicio).toLocaleDateString("pt-BR")
                             }}</strong> até
                         <strong>{{ new Date(planoAlimentar.dataFim).toLocaleDateString("pt-BR") }}.</strong>

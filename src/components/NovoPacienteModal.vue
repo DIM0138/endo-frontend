@@ -1,20 +1,30 @@
 <script setup>
 import api from '@/services/api';
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 
 const nutricionistaId = ref(useRoute().params.id);
-const nomePaciente = ref('');
+
+const tokenForm = reactive({
+    nome_paciente: "",
+    profissional_responsavel: nutricionistaId.value,
+    email: "",
+
+})
 
 const submitForm = (async () => {
-    await api.get('/pacientes/token/novo', { params: { nomePaciente: nomePaciente.value, idNutricionista: nutricionistaId.value } })
-        .then(() => {
-            window.location.reload();
+    await api.post('/tokens', tokenForm)
+        .then((response) => {
+            if (response.status == 200) {
+                window.location.reload();
+            }
         })
         .catch((error) => {
             console.error(error)
+
         })
 })
+
 
 </script>
 
@@ -29,9 +39,16 @@ const submitForm = (async () => {
                 </div>
                 <form @submit.prevent="submitForm">
                     <div class="modal-body py-4">
-
-                        <label for="nomePaciente">Nome do Paciente</label>
-                        <input class="form-control" v-model="nomePaciente" id="nomePaciente" type="text" required>
+                        <div class="my-2">
+                            <label for="nomePaciente">Nome do Paciente</label>
+                            <input class="form-control" v-model="tokenForm.nome_paciente" id="nomePaciente" type="text"
+                                required>
+                        </div>
+                        <div class="my-2">
+                            <label for="nomePaciente">Email do Paciente</label>
+                            <input class="form-control" v-model="tokenForm.email" id="nomePaciente" type="email"
+                                required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

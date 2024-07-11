@@ -7,7 +7,7 @@ const idNutricionista = ref(useRoute().params.id)
 const nutricionista = ref({})
 async function fetchData() {
     await api
-        .get(`/nutricionistas/${idNutricionista.value}`)
+        .get(`/enutri/nutricionistas/${idNutricionista.value}`)
         .then((response) => {
             nutricionista.value = response.data
         })
@@ -23,8 +23,8 @@ onBeforeMount(() => {
 
 <template>
     <div>
-        <h4 class="mb-3"><i class="bi bi-calendar4-event"></i> Bem vind{{ nutricionista.genero == 'Feminino' ? 'a' :
-            nutricionista.genero == 'Masculino' ? 'o' : 'e' }}, {{ nutricionista.nomeCompleto }}! Hoje é {{ new
+        <h4 class="mb-3"><i class="bi bi-calendar4-event"></i> Bem vind{{ nutricionista.genero == 'FEMININO' ? 'a' :
+            nutricionista.genero == 'MASCULINO' ? 'o' : 'e' }}, {{ nutricionista.nome_completo }}! Hoje é {{ new
             Date().toLocaleDateString('pt-BR') }}</h4>
         <div>
             <div class="text-center">

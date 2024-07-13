@@ -188,7 +188,7 @@ const validateForm = () => {
 
 <style scoped>
 .btn-perfil {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     border-radius: 5px;
@@ -197,7 +197,7 @@ const validateForm = () => {
 }
 
 .btn-perfil:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-perfil:active {

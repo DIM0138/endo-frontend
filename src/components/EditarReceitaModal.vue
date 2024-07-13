@@ -7,7 +7,7 @@ const receita = reactive(receitaOriginal)
 
 const submitForm = (async () => {
     console.log(receita)
-    await api.patch('/enutri/receitas/' + receitaOriginal.id)
+    await api.patch('/prescricoes/' + receitaOriginal.id)
         .then(() => {
             window.location.reload()
         })
@@ -15,36 +15,6 @@ const submitForm = (async () => {
             console.error(error)
         })
 })
-
-const adicionarIngrediente = () => {
-    receita.value.ingredientes.push({
-        ingrediente: {
-            nome: '',
-            medida: '',
-        },
-        quantidade: 0
-    })
-}
-
-const removerIngrediente = (index) => {
-    if (receita.value.ingredientes.length == 1) {
-        return;
-    }
-
-    receita.value.ingredientes.splice(index, 1)
-}
-
-const adicionarPasso = () => {
-    receita.value.modoPreparo.push("")
-}
-
-const removerPasso = (index) => {
-    if (receita.value.modoPreparo.length == 1) {
-        return;
-    }
-
-    receita.value.modoPreparo.splice(index, 1)
-}
 
 const adicionarAlergico = () => {
     receita.value.alergicos.push("")
@@ -83,64 +53,18 @@ const toggleAlergicos = () => {
                         <label for="nomeReceita">Nome da Receita</label>
                         <input class="form-control" v-model="receita.nome" id="nomeReceita" type="text" required>
 
-                        <label class="mt-2" for="tipoRefeicao">Tipo de Refeição</label>
-                        <select v-model="receita.tipoRefeicao" class="form-select" id="tipoRefeicao" required>
-                            <option value="CAFE">Café da Manhã</option>
-                            <option value="ALMOCO">Almoço</option>
-                            <option value="JANTAR">Jantar</option>
-                            <option value="LANCHE">Lanche</option>
-                            <option value="OUTRO">Outro</option>
-                        </select>
 
                         <label class="mt-2" for="descricaoReceita">Descrição</label>
                         <textarea class="form-control" v-model="receita.descricao" id="descricaoReceita" type="text">
                         </textarea>
 
-                        <div class="row mt-2">
-                            <div class="col-12 col-sm-6">
-                                <label for="tempoPreparo">Tempo de Preparo (minutos)</label>
-                                <input class="form-control" v-model="receita.tempoPreparo" id="tempoPreparo"
-                                    type="number" min="0" required>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <label for="calorias">Calorias (kcal)</label>
-                                <input class="form-control" v-model="receita.calorias" id="calorias" type="number"
-                                    min="0" required>
-                            </div>
-                        </div>
-
-                        <label class="mt-2" for="imagemReceita">Imagem</label>
-                        <input class="form-control" v-model="receita.imagemURL" id="imagemReceita" type="text">
-
-                        <div class="d-flex mt-3 gap-2">
-                            <label class="mt-2" for="ingredientesReceita">Lista de Ingredientes</label>
-                            <button type="button" @click="adicionarIngrediente()" class="btn btn-receita"><i
-                                    class="bi bi-plus-circle-fill me-1"></i>Adicionar
-                                ingrediente</button>
-                        </div>
-                        <div v-for="(ingrediente, index) in receita.ingredientes" class="mt-2" :key="index">
-                            <div class="d-flex align-items-center gap-2">
-                                <input class="form-control flex-grow-1" v-model="ingrediente.ingrediente.nome"
-                                    id="nomeIngrediente" type="text" required>
-                                <select class="form-select w-25" v-model="ingrediente.ingrediente.medida" required>
-                                    <option value="QUILOS">Quilos</option>
-                                    <option value="GRAMAS">Gramas</option>
-                                    <option value="LITROS">Litros</option>
-                                    <option value="MILILITROS">Mililitros</option>
-                                    <option value="XICARAS">Xícara</option>
-                                    <option value="COLHER_DE_SOPA">Colher de Sopa</option>
-                                    <option value="COLHER_DE_CHA">Colher de Chá</option>
-                                    <option value="UNIDADE">Unidade</option>
-                                </select>
-                                <input class="form-control w-25" v-model="ingrediente.quantidade"
-                                    id="quantidadeIngrediente" type="number" min="0" step="0.1" required>
-                                <i class="bi bi-trash-fill remover" @click="removerIngrediente(index)"></i>
-                            </div>
-                        </div>
+                        <label class="mt-2" for="descricaoReceita">Instruções</label>
+                        <textarea class="form-control" v-model="receita.instrucoes" id="instrucoesReceita" type="text">
+                        </textarea>
 
                         <div class="form-check mt-2">
                             <label class="form-check-label" for="contemAlergicosCheckbox">
-                                Essa receita possui alérgicos
+                                Esse medicamento possui alérgicos
                             </label>
                             <input class="form-check-input" type="checkbox" v-model="receita.contemAlergicos"
                                 id="contemAlergicosCheckbox" @change="toggleAlergicos()">
@@ -162,21 +86,6 @@ const toggleAlergicos = () => {
                             </div>
                         </div>
 
-                        <div class="d-flex my-2 gap-2">
-                            <label class="mt-2" for="passosReceita">Modo de Preparo</label>
-                            <button type="button" @click="adicionarPasso()" class="btn btn-receita"><i
-                                    class="bi bi-plus-circle-fill me-1"></i>Adicionar passo</button>
-                        </div>
-
-                        <div v-for="(passo, indexPasso) in receita.modoPreparo" class="mt-2" :key="indexPasso">
-                            <div class="d-flex align-items-center gap-1">
-                                <div>{{ indexPasso + 1 }}. </div>
-                                <input class="form-control" v-model="receita.modoPreparo[indexPasso]"
-                                    id="descricaoPasso" type="text" required>
-                                <i class="bi bi-trash-fill remover" @click="removerPasso(indexPasso);"></i>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -194,14 +103,14 @@ label {
 }
 
 .btn-receita {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .btn-receita:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-receita:active {

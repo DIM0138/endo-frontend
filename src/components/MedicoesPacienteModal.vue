@@ -29,14 +29,14 @@ const { paciente } = defineProps(['paciente'])
 
 <style scoped>
 .btn-salvar {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .btn-salvar:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-salvar:active {

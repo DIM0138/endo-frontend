@@ -25,28 +25,11 @@ const unitsDictionary = {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <img :src="receita.imagemURL" class="img-receita mb-2" alt="..." />
-          <div class="infos-receita rounded-3 ps-3 py-2 mb-4">
-            <span class="me-3"> {{ receita.tipoRefeicao }}</span>
-            <span class="me-3"><i class="bi bi-clock"></i> {{ receita.tempoPreparo }} minutos</span>
-            <span class="me-3"><i class="bi bi-lightning"></i> {{ receita.calorias }} calorias</span>
-            <span v-if="receita.contemAlergicos" class="me-3"><i class="bi bi-exclamation-triangle"></i> Contém
-              alergicos </span>
-          </div>
-          <h5>Ingredientes</h5>
-          <ul>
-            <li v-for="(ingrediente, index) in receita.ingredientes" :key="index">
-              {{ ingrediente.quantidade }} {{ unitsDictionary[ingrediente.ingrediente.medida] }} de <span
-                class="text-lowercase">{{ ingrediente.ingrediente.nome }}</span>
-            </li>
-          </ul>
+          
+          <p>{{ receita.descricao }}</p>
           <hr>
-          <h5>Modo de preparo</h5>
-          <ol>
-            <li v-for="(passo, index) in receita.modoPreparo" :key="index">
-              {{ passo }}
-            </li>
-          </ol>
+          <h5>Instruções</h5>
+          <p>{{ receita.instrucoes }}</p>
           <div v-if="receita.contemAlergicos">
             <h5><i class="bi bi-exclamation-triangle"></i> Lista de Alérgicos</h5>
             <ul>

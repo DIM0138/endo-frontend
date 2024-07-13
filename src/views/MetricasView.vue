@@ -2,6 +2,7 @@
 import AdesaoMetricaCard from '@/components/AdesaoMetricaCard.vue'
 import QuantidadeMetricaCard from '@/components/QuantidadeMetricaCard.vue'
 import RelatoriosTabelas from '@/components/RelatoriosTabelas.vue'
+import FrequenciaChart from '@/components/FrequenciaChart.vue'
 
 import api from '@/services/api'
 import { onBeforeMount, ref } from 'vue'
@@ -19,15 +20,12 @@ const dataFim = ref(null)
 let mensagemErro = ref('')
 const loading = ref(true)
 
-const adesaoTag = ref({})
+const frequenciaMedicacao = ref({})
 const adesaoEmocao = ref({})
 const sintomas = ref({})
 const quantidadeQualidadeSono = ref({})
 const quantidadeEmocao = ref({})
 const componentKey = ref(0)
-
-const labelsAdesaoTag = ['CAFE', 'ALMOCO', 'JANTAR', 'LANCHE', 'OUTRO']
-const labelsReadAdesaoTag = ['Café da manhã', 'Almoço', 'Jantar', 'Lanche', 'Outro']
 
 const labelsEmocao = ['FELIZ', 'TRISTE', 'NEUTRO', 'ESTRESSADO', 'ANSIOSO']
 const labelsReadEmocao = ['Feliz', 'Triste', 'Neutro', 'Estressado', 'Ansioso']
@@ -55,7 +53,7 @@ async function fetchData(dataInicio, dataFim) {
   try {
     await api.get(`/metricas/${idPaciente.value}` + filtro).then((response) => {
       dados.value = response.data
-      adesaoTag.value = response.data.adesaoTag
+      frequenciaMedicacao.value = response.data.frequenciaPrescricao
       adesaoEmocao.value = response.data.adesaoEmocao
       sintomas.value = response.data.sintomas
       quantidadeQualidadeSono.value = response.data.quantidadeQualidadeSono
@@ -131,8 +129,8 @@ onBeforeMount(() => {
           <h5>Adesão às refeições</h5>
           <div class="row">
             <div class="col mb-2">
-              <AdesaoMetricaCard :metricas="adesaoTag" :key="componentKey" :labels="labelsAdesaoTag"
-                :labelsRead="labelsReadAdesaoTag" titleText="Adesão às refeições por tipo" />
+              <FrequenciaChart :metricas="frequenciaMedicacao" :key="componentKey" :labels="labelsEmocao"
+                :labelsRead="labelsReadEmocao" titleText="Frequência de medicações" />
             </div>
             <div class="col">
               <AdesaoMetricaCard :metricas="adesaoEmocao" :key="componentKey" :labels="labelsEmocao"

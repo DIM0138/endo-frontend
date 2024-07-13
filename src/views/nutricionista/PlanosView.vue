@@ -57,7 +57,7 @@ watch([pesquisaNome, pesquisaTipo], () => {
     <div class="container-fluid">
         <div class="header sticky-top">
             <div class="row">
-                <h3 class="col">Planos Alimentares</h3>
+                <h3 class="col">Planos</h3>
                 <button class="btn btn-receita col-5 col-md-3" data-bs-toggle="modal"
                     data-bs-target="#novoPlanoAlimentarModal"><i class="bi bi-plus-circle-fill me-1"></i>Novo
                     plano</button>
@@ -118,7 +118,7 @@ watch([pesquisaNome, pesquisaTipo], () => {
 
 <style scoped>
 .btn-receita {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     border-radius: 5px;
@@ -127,7 +127,7 @@ watch([pesquisaNome, pesquisaTipo], () => {
 }
 
 .btn-receita:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-receita:active {

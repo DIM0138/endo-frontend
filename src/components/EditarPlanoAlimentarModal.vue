@@ -6,8 +6,8 @@ import { reactive } from 'vue';
 const { planoAlimentar } = defineProps(['planoAlimentar']);
 let planoAlimentarModal = reactive(planoAlimentar);
 
-const deleteRefeicao = (async (refeicao, registroDiario, index) => {
-    await api.delete('/planos/' + planoAlimentarModal.id + '/atividade-diaria/' + refeicao.id)
+const deleteprescricao = (async (prescricao, registroDiario, index) => {
+    await api.delete('/planos/' + planoAlimentarModal.id + '/atividade-diaria/' + prescricao.id)
         .then(() => {
             registroDiario.refeicoes.splice(index, 1);
         })
@@ -16,8 +16,8 @@ const deleteRefeicao = (async (refeicao, registroDiario, index) => {
         })
 })
 ''
-const novaRefeicao = (async (escolhas, registroDiario) => {
-    const refeicao = {
+const novaprescricao = (async (escolhas, registroDiario) => {
+    const prescricao = {
         data: registroDiario.data,
         tratamento: {
             id: escolhas.receitaEscolhida
@@ -25,8 +25,8 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
         horario: escolhas.horarioEscolhido
     }
 
-    console.log(refeicao);
-    await api.post('/planos/' + planoAlimentarModal.id + '/atividade-diaria', refeicao)
+    console.log(prescricao);
+    await api.post('/planos/' + planoAlimentarModal.id + '/atividade-diaria', prescricao)
         .then((response) => {
             if (response.status == 200) {
                 registroDiario.refeicoes.push(response.data);
@@ -45,7 +45,7 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 editarPlanoAlimentarModalLabel">Editar Plano Alimentar</h1>
+                    <h1 class="modal-title fs-5 editarPlanoAlimentarModalLabel">Editar Plano</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4">
@@ -85,33 +85,30 @@ const novaRefeicao = (async (escolhas, registroDiario) => {
                                     aria-expanded="false"
                                     :aria-controls="'registroDiarioCollapse' + planoAlimentarModal.id + registroDiario.id">
                                     {{ registroDiario.data }}
-                                    (0 refeições)
                                 </button>
                             </h2>
 
                             <div :id="'registroDiarioCollapse' + planoAlimentarModal.id + registroDiario.id"
                                 class="accordion-collapse collapse" data-bs-parent="#accordionRegistrosDiarios">
                                 <div class="accordion-body">
-                                    <EscolherReceita @escolherReceita="novaRefeicao($event, registroDiario)" />
+                                    <EscolherReceita @escolherReceita="novaprescricao($event, registroDiario)" />
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Receita Escolhida</th>
+                                                <th>Prescricão Escolhida</th>
                                                 <th>Hora</th>
-                                                <th>Calorias</th>
                                                 <th>Alérgicos</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(refeicao, index) in registroDiario.atividadesDiarias"
-                                                :key="'refeicao' + refeicao.id">
-                                                <td>{{ refeicao.tratamento.nome }}</td>
-                                                <td>{{ refeicao.horario }}</td>
-                                                <td>{{ refeicao.tratamento.calorias }}</td>
-                                                <td>{{ refeicao.tratamento.contemAlergicos ? 'Sim' : 'Não' }}</td>
+                                            <tr v-for="(prescricao, index) in registroDiario.atividadesDiarias"
+                                                :key="'prescricao' + prescricao.id">
+                                                <td>{{ prescricao.tratamento.nome }}</td>
+                                                <td>{{ prescricao.horario }}</td>
+                                                <td>{{ prescricao.tratamento.contemAlergicos ? 'Sim' : 'Não' }}</td>
                                                 <td><button class="btn btn-outline-danger"
-                                                        @click="deleteRefeicao(refeicao, registroDiario, index)"><i
+                                                        @click="deleteprescricao(prescricao, registroDiario, index)"><i
                                                             class="bi bi-trash"></i></button></td>
                                             </tr>
                                         </tbody>
@@ -136,14 +133,14 @@ label {
 }
 
 .btn-plano {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .btn-plano:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-plano:active {

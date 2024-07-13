@@ -133,7 +133,7 @@ const submitLogin = (async () => {
 
 <style scoped>
 p {
-    color: #8A0B01;
+    color: #071952;
     font-weight: bold;
     font-size: larger;
     text-align: center;
@@ -141,13 +141,13 @@ p {
 }
 
 label {
-    color: #8A0B01;
+    color: #071952;
     font-weight: bold;
     font-size: medium;
 }
 
 .btn-login {
-    background-color: #F8694D;
+    background-color: #478CCF;
     color: white;
     border: none;
     border-radius: 5px;
@@ -157,7 +157,7 @@ label {
 }
 
 .btn-login:hover {
-    background-color: #d65b43;
+    background-color: #4535C1;
 }
 
 .btn-login:active {
@@ -165,12 +165,12 @@ label {
 }
 
 .cadastro-link {
-    color: #8A0B01;
+    color: #071952;
     font-weight: bold;
     text-decoration: none;
 }
 
 .cadastro-link:hover {
-    color: #F8694D;
+    color: #478CCF;
 }
 </style>

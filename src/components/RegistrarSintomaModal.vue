@@ -57,7 +57,7 @@ const submitForm = async () => {
 
 <style scoped>
 .btn-salvar {
-  background-color: #8a0b01;
+  background-color: #071952;
   color: white;
 }
 </style>

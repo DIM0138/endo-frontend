@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SobreView from '@/views/SobreView.vue'
 import CadastroView from '@/views/CadastroView.vue'
-import ReceitasView from '@/views/nutricionista/ReceitasView.vue'
-import DashboardViewNutricionista from '@/views/nutricionista/DashboardViewNutricionista.vue'
+import PrescricoesView from '@/views/nutricionista/PrescricoesView.vue'
+import DashboardViewEndo from '@/views/nutricionista/DashboardViewEndo.vue'
 import DashboardViewPaciente from '@/views/paciente/DashboardViewPaciente.vue'
 import PacientesView from '@/views/nutricionista/PacientesView.vue'
-import PlanosAlimentaresView from '@/views/nutricionista/PlanosAlimentaresView.vue'
+import PlanosView from '@/views/nutricionista/PlanosView.vue'
 import PerfilViewNutricionista from '@/views/nutricionista/PerfilViewNutricionista.vue'
 import PlanoAlimentarView from '@/views/paciente/PlanoAlimentarView.vue'
 import MetricasView from '@/views/MetricasView.vue'
@@ -37,14 +37,14 @@ const router = createRouter({
       redirect: '/'
     },
     {
-      path: '/nutricionista/:id',
-      name: 'nutricionista-dashboard',
-      component: DashboardViewNutricionista,
-      redirect: { name: 'pagina-inicial-nutricionista' },
+      path: '/endocrinologista/:id',
+      name: 'endocrinologista-dashboard',
+      component: DashboardViewEndo,
+      redirect: { name: 'pagina-inicial-endocrinologista' },
       children: [
         {
           path: 'pagina-inicial',
-          name: 'pagina-inicial-nutricionista',
+          name: 'pagina-inicial-endocrinologista',
           component: PaginaInicialNutricionistaView
         },
         {
@@ -54,22 +54,22 @@ const router = createRouter({
         },
         {
           path: 'perfil',
-          name: 'nutricionista-perfil',
+          name: 'endocrinologista-perfil',
           component: PerfilViewNutricionista
         },
         {
-          path: 'planos-alimentares',
-          name: 'nutricionista-planos-alimentares',
-          component: PlanosAlimentaresView
+          path: 'planos',
+          name: 'endocrinologista-planos',
+          component: PlanosView
         },
         {
           path: 'receitas',
-          name: 'nutricionista-receitas',
-          component: ReceitasView
+          name: 'endocrinologista-receitas',
+          component: PrescricoesView
         },
         {
           path: 'pacientes',
-          name: 'nutricionista-pacientes',
+          name: 'endocrinologista-pacientes',
           component: PacientesView
         }
       ]
@@ -91,8 +91,8 @@ const router = createRouter({
           component: PerfilViewPaciente
         },
         {
-          path: 'plano-alimentar',
-          name: 'paciente-plano-alimentar',
+          path: 'plano',
+          name: 'paciente-plano',
           component: PlanoAlimentarView
         },
         {

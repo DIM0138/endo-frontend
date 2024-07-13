@@ -67,7 +67,7 @@ const formDataNutricionista = reactive({
     cpf: "",
     login: "",
     senha: "",
-    crn: "",
+    crm: "",
     formacao: "",
     especialidade: "",
     endereco_profissional: "",
@@ -110,8 +110,8 @@ const formDataNutricionista = reactive({
                     pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" required>
             </div>
             <div class="col-lg-3">
-                <label for="inputCrn" class="form-label">CRN</label>
-                <input type="text" class="form-control" id="inputCrn" v-model="formDataNutricionista.crn" required>
+                <label for="inputCrn" class="form-label">CRM</label>
+                <input type="text" class="form-control" id="inputCrm" v-model="formDataNutricionista.crn" required>
             </div>
             <div class="col-md-6">
                 <label for="inputSenha" class="form-label">Senha</label>
@@ -160,7 +160,7 @@ const formDataNutricionista = reactive({
 
 <style scoped>
 .btn-cadastro {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     border-radius: 5px;
@@ -169,7 +169,7 @@ const formDataNutricionista = reactive({
 }
 
 .btn-cadastro:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-cadastro:active {

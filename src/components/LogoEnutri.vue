@@ -7,7 +7,7 @@ const { logoSize } = defineProps(['logoSize']);
 <template>
     <div class="">
         <span class="e" :style="{ fontSize: logoSize * 100 + '%' }">e</span>
-        <span class="nutri" :style="{ fontSize: logoSize * 70 + '%' }">nutri</span>
+        <span class="nutri" :style="{ fontSize: logoSize * 70 + '%' }">endo</span>
     </div>
 </template>
 
@@ -26,10 +26,10 @@ span {
 }
 
 .e {
-    color: #F8694D;
+    color: #77E4C8;
 }
 
 .nutri {
-    color: #FF9C28;
+    color: #4535C1;
 }
 </style>

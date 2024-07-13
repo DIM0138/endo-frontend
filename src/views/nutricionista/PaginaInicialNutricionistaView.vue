@@ -28,8 +28,8 @@ onBeforeMount(() => {
             Date().toLocaleDateString('pt-BR') }}</h4>
         <div>
             <div class="text-center">
-                <img src="../../assets/nutricionista.png" class="img-nutricionista" />
-                <h5>Esse é o seu Painel de Nutricionista. Aqui, você pode gerenciar receitas, pacientes, planos
+                <img src="../../assets/medico.svg" class="img-nutricionista" />
+                <h5>Esse é o seu Painel de Endocrinologista. Aqui, você pode gerenciar receitas, pacientes, planos
                     alimentares e relatórios em um só lugar. Use o menu lateral para navegar.</h5>
             </div>
         </div>

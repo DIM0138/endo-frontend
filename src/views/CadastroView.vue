@@ -30,7 +30,7 @@ const userType = ref('');
 
 <style>
 .btn-cadastro {
-  background-color: #F8694D;
+  background-color: #478CCF;
   color: white;
   border: none;
   border-radius: 5px;
@@ -39,7 +39,7 @@ const userType = ref('');
 }
 
 .btn-cadastro:hover {
-  background-color: #d65b43;
+  background-color: #36C2CE;
 }
 
 .btn-cadastro:active {

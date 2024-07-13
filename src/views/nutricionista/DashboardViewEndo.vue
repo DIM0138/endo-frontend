@@ -3,16 +3,16 @@ import { RouterView, useRoute } from 'vue-router'
 import { onBeforeMount, ref } from 'vue'
 import api from '@/services/api';
 
-const nutricionista = ref();
-const nutricionistaId = ref(useRoute().params.id);
+const endocrinologista = ref();
+const endocrinologistaId = ref(useRoute().params.id);
 const found = ref(false);
 const loading = ref(true);
 
 onBeforeMount(async () => {
 
-    await api.get("/enutri/nutricionistas/" + nutricionistaId.value)
+    await api.get("/endo/endocrinologistas/" + endocrinologistaId.value)
         .then((response) => {
-            nutricionista.value = response.data;
+            endocrinologista.value = response.data;
             found.value = true;
             loading.value = false;
         })
@@ -52,24 +52,23 @@ onBeforeMount(async () => {
                 <div class="col-3 d-none d-md-block align-items-center">
 
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                        :to="{ name: 'pagina-inicial-nutricionista', params: { id: nutricionistaId } }">
+                        :to="{ name: 'pagina-inicial-endocrinologista', params: { id: endocrinologistaId } }">
                         <i class="bi bi-house-fill me-1"></i>
                         Página inicial</router-link>
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                        :to="{ name: 'nutricionista-planos-alimentares', params: { id: nutricionistaId } }"><i
-                            class="bi bi-journal-medical me-1"></i>Planos
-                        alimentares</router-link>
+                        :to="{ name: 'endocrinologista-planos', params: { id: endocrinologistaId } }"><i
+                            class="bi bi-journal-medical me-1"></i>Planos</router-link>
 
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                        :to="{ name: 'nutricionista-receitas', params: { id: nutricionistaId } }"><i
-                            class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                        :to="{ name: 'endocrinologista-receitas', params: { id: endocrinologistaId } }"><i
+                            class="bi bi-capsule me-1"></i>Prescrições</router-link>
 
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                        :to="{ name: 'nutricionista-pacientes', params: { id: nutricionistaId } }"><i
+                        :to="{ name: 'endocrinologista-pacientes', params: { id: endocrinologistaId } }"><i
                             class="bi bi-people-fill me-1"></i>Pacientes</router-link>
 
                     <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-                        :to="{ name: 'nutricionista-perfil', params: { id: nutricionistaId } }"><i
+                        :to="{ name: 'endocrinologista-perfil', params: { id: endocrinologistaId } }"><i
                             class="bi bi-person-circle me-1"></i>Perfil</router-link>
 
                 </div>
@@ -78,23 +77,23 @@ onBeforeMount(async () => {
                     <div class="mobile-menu container-fluid">
                         <div class="d-flex justify-content-between">
                             <router-link class="mobile-menu-link"
-                                :to="{ name: 'nutricionista-dashboard', params: { id: nutricionistaId } }"><i
+                                :to="{ name: 'endocrinologista-dashboard', params: { id: endocrinologistaId } }"><i
                                     class="bi bi-house-fill me-1"></i>Início</router-link>
 
                             <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                                :to="{ name: 'nutricionista-planos-alimentares', params: { id: nutricionistaId } }"><i
+                                :to="{ name: 'endocrinologista-planos', params: { id: endocrinologistaId } }"><i
                                     class="bi bi-journal-medical me-1"></i>Planos</router-link>
 
                             <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                                :to="{ name: 'nutricionista-receitas', params: { id: nutricionistaId } }"><i
-                                    class="bi bi-egg-fill me-1"></i>Receitas</router-link>
+                                :to="{ name: 'endocrinologista-receitas', params: { id: endocrinologistaId } }"><i
+                                    class="bi bi-capsule me-1"></i>Prescrições</router-link>
 
                             <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                                :to="{ name: 'nutricionista-pacientes', params: { id: nutricionistaId } }"><i
+                                :to="{ name: 'endocrinologista-pacientes', params: { id: endocrinologistaId } }"><i
                                     class="bi bi-people-fill me-1"></i>Pacientes</router-link>
 
                             <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                                :to="{ name: 'nutricionista-perfil', params: { id: nutricionistaId } }"><i
+                                :to="{ name: 'endocrinologista-perfil', params: { id: endocrinologistaId } }"><i
                                     class="bi bi-person-circle me-1"></i>Perfil</router-link>
                         </div>
                     </div>
@@ -119,7 +118,7 @@ onBeforeMount(async () => {
     text-decoration: none;
     width: 100%;
     height: 8vh;
-    color: #8a0b01;
+    color: #071952;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -129,16 +128,16 @@ onBeforeMount(async () => {
 }
 
 .dashboard-menu-link:hover {
-    background-color: #f8694d;
-    color: #faf0e4;
+    background-color: #36C2CE;
+    color: #ECF4D6;
 }
 
 .dashboard-menu-link-active {
-    color: #ff9c28;
+    color: #03C988;
 }
 
 .mobile-menu {
-    background-color: #faf0e4;
+    background-color: #ECF4D6;
     border-radius: 5px;
     padding: 1vh;
 }
@@ -148,11 +147,11 @@ onBeforeMount(async () => {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #8a0b01;
+    color: #071952;
 }
 
 .mobile-menu-link-active {
-    color: #ff9c28;
+    color: #03C988;
 }
 
 .dashboard-content {

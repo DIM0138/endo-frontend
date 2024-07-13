@@ -52,9 +52,8 @@ onBeforeMount(async () => {
             Página inicial</router-link>
 
           <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
-            :to="{ name: 'paciente-plano-alimentar', params: { idPaciente: pacienteId } }"><i
-              class="bi bi-journal-medical me-1"></i>Plano
-            Alimentar</router-link>
+            :to="{ name: 'paciente-plano', params: { idPaciente: pacienteId } }"><i
+              class="bi bi-journal-medical me-1"></i>Plano</router-link>
 
           <router-link class="dashboard-menu-link" active-class="dashboard-menu-link-active"
             :to="{ name: 'paciente-metricas', params: { idPaciente: pacienteId } }"><i
@@ -75,9 +74,8 @@ onBeforeMount(async () => {
                 Página inicial</router-link>
 
               <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
-                :to="{ name: 'paciente-plano-alimentar', params: { idPaciente: pacienteId } }"><i
-                  class="bi bi-journal-medical me-1"></i>Plano
-                Alimentar</router-link>
+                :to="{ name: 'paciente-plano', params: { idPaciente: pacienteId } }"><i
+                  class="bi bi-journal-medical me-1"></i>Plano</router-link>
 
               <router-link class="mobile-menu-link" active-class="mobile-menu-link-active"
                 :to="{ name: 'paciente-metricas', params: { idPaciente: pacienteId } }"><i
@@ -104,7 +102,7 @@ onBeforeMount(async () => {
   text-decoration: none;
   width: 100%;
   height: 8vh;
-  color: #8a0b01;
+  color: #071952;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -114,16 +112,16 @@ onBeforeMount(async () => {
 }
 
 .dashboard-menu-link:hover {
-  background-color: #f8694d;
-  color: #faf0e4;
+  background-color: #36C2CE;
+  color: #ECF4D6;
 }
 
 .dashboard-menu-link-active {
-  color: #ff9c28;
+  color: #03C988;
 }
 
 .mobile-menu {
-  background-color: #faf0e4;
+  background-color: #ECF4D6;
   border-radius: 5px;
   padding: 1vh;
 }
@@ -133,11 +131,11 @@ onBeforeMount(async () => {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #8a0b01;
+  color: #071952;
 }
 
 .mobile-menu-link-active {
-  color: #ff9c28;
+  color: #03C988;
 }
 
 .dashboard-content {

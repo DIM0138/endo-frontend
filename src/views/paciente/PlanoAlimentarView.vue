@@ -7,7 +7,7 @@ import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const planoAlimentar = ref(null);
-const listaDeCompras = ref(null);
+const resumo = ref(null);
 const loading = ref(true);
 const idPaciente = ref(null);
 
@@ -27,12 +27,12 @@ onBeforeMount(async () => {
         })
 })
 
-const generateListaDeCompras = async (idPlanoAlimentar) => {
+const generateResumo = async (idPlanoAlimentar) => {
     await api.get(`/planos/resumo/${idPlanoAlimentar}`)
         .then((response) => {
             if (response.status == 200) {
                 console.log(response.data)
-                listaDeCompras.value = response.data;
+                resumo.value = response.data;
             }
         })
         .catch((error) => {
@@ -65,30 +65,39 @@ const unitsDictionary = {
 
         <div v-else-if="planoAlimentar">
             <div class="row mb-4">
-                <h4 class="col">Plano alimentar atual</h4>
-                <button @click="generateListaDeCompras(planoAlimentar.id)" class="col btn btn-secondary"
+                <h4 class="col">Plano atual</h4>
+                <button @click="generateResumo(planoAlimentar.id)" class="col btn btn-secondary"
                     data-bs-toggle="modal" data-bs-target="#listaComprasModal">
-                    <i class="bi bi-basket2-fill me-1"></i>
-                    Lista de compras
+                    <i class="bi bi-journal-text me-1"></i>
+                    Resumo
                 </button>
                 <div class="modal fade" id="listaComprasModal" tabindex="-1" aria-labelledby="listaComprasModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de compras</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Resumo</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <ul v-if="listaDeCompras">
-                                    <li v-for="(item, index) in listaDeCompras.itens" :key="index">
-                                        {{ item.quantidadeTotal }} {{ unitsDictionary[item.metrica] }} de <span
-                                            class="text-lowercase">{{ item.ingrediente }}</span>
+                                <ul v-if="resumo">
+                                    <li v-for="(item, index) in resumo.itemResumo" :key="index">
+                                        {{ item.data }}
+                                        <ul>
+                                            <li v-for="(horarios, medicacao,) in item.medicamentosHorarios" :key="index">
+                                                {{ medicacao }}
+                                                <ul>
+                                                    <li v-for="(horario, index) in horarios" :key="index">
+                                                        {{ horario }}
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                                 <div v-else>
-                                    Nenhum item na Lista
+                                    Nenhum item no resumo
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -132,7 +141,7 @@ const unitsDictionary = {
             </div>
         </div>
         <div v-else>
-            <h4 class="text-center">Nenhum plano de alimentar encontrado.</h4>
+            <h4 class="text-center">Nenhum plano encontrado.</h4>
         </div>
     </div>
 </template>

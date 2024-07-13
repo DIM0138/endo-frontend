@@ -10,6 +10,7 @@ const submitForm = async () => {
   try {
     await api.post('/planos/registros-diarios/responder', {
       id: idRegistro,
+      sintomas: [],
       qualidadeSono: sono.value,
     }).then(() => {
       window.location.reload();
@@ -50,7 +51,7 @@ const submitForm = async () => {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button ttype="submit" class="btn btn-salvar">Registrar</button>
+            <button type="submit" class="btn btn-salvar">Registrar</button>
           </div>
         </form>
       </div>
@@ -60,7 +61,7 @@ const submitForm = async () => {
 
 <style scoped>
 .btn-salvar {
-  background-color: #8a0b01;
+  background-color: #071952;
   color: white;
 }
 </style>

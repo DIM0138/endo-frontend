@@ -14,7 +14,7 @@ const submitForm = async () => {
       .post('/planos/atividades-diarias/responder', {
         id: refeicaoId,
         emocao: emocao.value,
-        refeicaoFeita: refeicaoFeita.value,
+        atividadeFeita: refeicaoFeita.value,
       })
       .then(() => {
         window.location.reload();
@@ -32,7 +32,7 @@ const submitForm = async () => {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 registroModalLabel">Registrar refeição</h1>
+          <h1 class="modal-title fs-5 registroModalLabel">Registrar medicação</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form @submit.prevent="submitForm">
@@ -40,7 +40,7 @@ const submitForm = async () => {
             <div class="form-check form-switch mb-4">
               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
                 v-model="refeicaoFeita" checked />
-              <label class="form-check-label" for="flexSwitchCheckChecked">Refeição feita</label>
+              <label class="form-check-label" for="flexSwitchCheckChecked">Feito</label>
             </div>
 
             <label>Como você se sentiu? </label>
@@ -66,7 +66,7 @@ const submitForm = async () => {
 
 <style scoped>
 .btn-salvar {
-  background-color: #8a0b01;
+  background-color: #071952;
   color: white;
 }
 </style>

@@ -227,14 +227,14 @@ onBeforeMount(() => {
 
 <style scoped>
 .btn-modal {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .btn-modal:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-modal:active {

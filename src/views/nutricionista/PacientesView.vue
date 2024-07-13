@@ -149,7 +149,7 @@ watch(pesquisaNome, () => {
 
 <style scoped>
 .btn-paciente {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     border-radius: 5px;
@@ -158,7 +158,7 @@ watch(pesquisaNome, () => {
 }
 
 .btn-paciente:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-paciente:active {

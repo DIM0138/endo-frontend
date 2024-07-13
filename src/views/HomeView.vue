@@ -13,17 +13,17 @@ import LoginForm from '@/components/LoginForm.vue';
           <LogoEnutri :logoSize="7" />
         </div>
 
-        <span class="description">Ao combinar conveniência, personalização e suporte contínuo, a plataforma eNutri se
+        <span class="description">Ao combinar conveniência, personalização e suporte contínuo, a plataforma eEndo se
           destaca como uma ferramenta indispensável para quem busca alcançar seus objetivos de saúde de forma eficaz e
           saudável. </span>
-        <img src="../assets/healthy-style.svg" class="d-block d-md-none order-2">
+        <img src="../assets/doctors.svg" class="d-block d-md-none order-2">
       </div>
 
       <div class="col-12 col-md-4 order-0 order-md-1">
         <LoginForm />
       </div>
     </div>
-    <img src="../assets/healthy-style.svg" class="desktop-img d-md-block d-none">
+    <img src="../assets/doctors.svg" class="desktop-img d-md-block d-none">
   </div>
 </template>
 
@@ -39,7 +39,7 @@ import LoginForm from '@/components/LoginForm.vue';
 
 .greeting {
   font-size: 1.2em;
-  color: #8a0b01;
+  color: #071952;
   font-weight: 700;
 }
 

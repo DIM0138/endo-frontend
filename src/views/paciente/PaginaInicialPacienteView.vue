@@ -41,7 +41,7 @@ onBeforeMount(() => {
 
 <template>
   <div>
-    <h4 class="mb-3"><i class="bi bi-calendar4-event"></i> Refeições de hoje </h4>
+    <h4 class="mb-3"><i class="bi bi-calendar4-event"></i> Prescrição de hoje </h4>
     <div v-if="loading">
       <div class="loading">
         <div class="spinner-border" role="status">
@@ -52,8 +52,8 @@ onBeforeMount(() => {
     <div v-else>
       <div v-if="!found">
         <div class="text-center">
-          <img src="../../assets/nutricionista.png" class="img-nutricionista" />
-          <h5>Nenhuma refeição registrada para hoje. Fale com seu nutricionista para mais informações.</h5>
+          <img src="../../assets/doctors.svg" class="img-nutricionista" />
+          <h5>Nenhuma prescrição registrada para hoje. Fale com seu médico para mais informações.</h5>
         </div>
       </div>
       <div v-else>

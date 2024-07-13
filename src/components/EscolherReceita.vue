@@ -35,13 +35,6 @@ watch([tipoEscolhido, pesquisaNome], () => {
         <form @submit.prevent="$emit('escolherReceita', { receitaEscolhida, horarioEscolhido })">
 
             <div class="input-group mb-3 ">
-                <select class="form-select" v-model="tipoEscolhido" style="line-height: 1rem;">
-                    <option value="TODOS">Todos</option>
-                    <option value="CAFE">Café</option>
-                    <option value="ALMOCO">Almoço</option>
-                    <option value="JANTAR">Jantar</option>
-                    <option value="OUTRO">Outro</option>
-                </select>
                 <input type="text" class="form-control" v-model="pesquisaNome" placeholder="Pesquisar">
                 <select class="form-select receita-select" v-model="receitaEscolhida" required>
                     <option v-for="receita in receitasFiltradas" :key="receita.id" :value="receita.id">{{ receita.nome
@@ -59,14 +52,14 @@ watch([tipoEscolhido, pesquisaNome], () => {
 
 <style scoped>
 .btn-salvar {
-    background-color: #F8694D;
+    background-color: #36C2CE;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .btn-salvar:hover {
-    background-color: #d65b43;
+    background-color: #478CCF;
 }
 
 .btn-salvar:active {
